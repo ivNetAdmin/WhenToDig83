@@ -11,6 +11,9 @@ namespace WhenToDig83
     {
         public App()
         {
+
+            var wtdTaskManager = new WTDTaskManager();
+
             // The root page of your application
             MainPage = new ContentPage
             {

@@ -11,9 +11,9 @@ namespace WhenToDig83.Data
         private readonly SQLiteConnection _connection;
         static object locker = new object();
 
-        public Repository(SQLiteConnection conn)
+        public Repository()
         {
-            _connection = conn;
+            _connection = Xamarin.Forms.DependencyService.Get<ISQLite>().GetConnection();
             Initialise();
         }
 
