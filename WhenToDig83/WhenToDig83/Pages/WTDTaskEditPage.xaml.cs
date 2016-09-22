@@ -13,6 +13,18 @@ namespace WhenToDig83.Pages
         public WTDTaskEditPage()
         {
             InitializeComponent();
+            this.BindingContext = new WTDTaskEditViewModel(this.Navigation);
+        }
+        
+        protected override void OnAppearing()
+        {
+            Context.OnAppearing();
+            base.OnAppearing();
+        }
+
+        private IPageLifeCycleEvents Context
+        {
+            get { return (IPageLifeCycleEvents)BindingContext; }
         }
     }
 }
