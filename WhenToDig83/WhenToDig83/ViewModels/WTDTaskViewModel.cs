@@ -46,6 +46,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
+             
                     await Navigation.PushAsync(new WTDTaskEditPage());
                 });
             }
