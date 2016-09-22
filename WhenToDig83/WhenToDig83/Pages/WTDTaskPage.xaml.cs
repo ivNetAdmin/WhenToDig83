@@ -12,4 +12,15 @@ namespace WhenToDig83.Pages
             this.BindingContext = new WTDTaskViewModel(this.Navigation);
         }
     }
+    
+    protected override void OnAppearing()
+        {
+            Context.OnAppearing();
+            base.OnAppearing();
+        }
+        
+    private IPageLifeCycleEvents Context
+        {
+            get { return (IPageLifeCycleEvents)BindingContext; }
+        }
 }
