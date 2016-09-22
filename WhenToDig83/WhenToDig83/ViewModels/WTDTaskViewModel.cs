@@ -51,7 +51,7 @@ namespace WhenToDig83.ViewModels
         #endregion
 
         #region Events
-        public ICommand Save
+        public ICommand New
         {
             get
             {
