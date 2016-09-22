@@ -16,7 +16,7 @@ namespace WhenToDig83.ViewModels
             _navigation = navigation;
             Date = DateTime.Now;
             
-            //var wtdTaskManager = new WTDTaskManager();
+            var wtdTaskManager = new WTDTaskManager();
 
             //var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
@@ -77,6 +77,32 @@ namespace WhenToDig83.ViewModels
         public void OnAppearing()
         {
 
+        }
+        #endregion
+        
+        #region Events
+        public ICommand Cancel
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await _navigation.PopModalAsync();
+                });
+            }
+        }
+        
+        public ICommand Save
+        {
+            get
+            {
+                 return new Command(async () =>
+                {
+                    wtdTaskManager.Save(Name, Date, Notes);
+                    await _navigation.PopModalAsync();
+                });
+                
+            }
         }
         #endregion
     }
