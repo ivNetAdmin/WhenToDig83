@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    public class WTDTaskViewModel : INotifyPropertyChanged
+    public class WTDTaskViewModel : INotifyPropertyChanged, IPageLifeCycleEvents
     {
         private INavigation _navigation;
         
@@ -40,6 +40,13 @@ namespace WhenToDig83.ViewModels
         private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Page Events
+        public void OnAppearing()
+        {
+
         }
         #endregion
 
