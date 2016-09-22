@@ -8,22 +8,12 @@
     <Entry Placeholder="Task Name" />
     <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
          <DatePicker.Format>ddMMMyyyy</DatePicker.Format>
-         <!--<DatePicker.MinimumDate>
-            <sys:DateTime x:FactoryMethod="Parse">
-               <x:Arguments>
-                  <x:String>Jan 1 2010</x:String>
-               </x:Arguments>
-            </sys:DateTime>
-         </DatePicker.MinimumDate>
-         <DatePicker.MaximumDate>
-            <sys:DateTime x:FactoryMethod="Parse">
-               <x:Arguments>
-                  <x:String>Dec 31 2050</x:String>
-               </x:Arguments>
-            </sys:DateTime>
-         </DatePicker.MaximumDate>-->
-      </DatePicker>
-      <Label Text="Notes:" />
-      <Editor />
+    </DatePicker>
+    <Label Text="Notes:" />
+    <Editor />
+  </StackLayout>
+  <StackLayout Orientation="Horizontal">
+    <Button Text="Cancel" />
+    <Button Text="Save" />
   </StackLayout>
 </ContentPage>
