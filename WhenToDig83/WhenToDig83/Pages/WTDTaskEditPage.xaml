@@ -7,8 +7,8 @@
   <StackLayout>
     <Entry Placeholder="Task Name" />
     <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
-         <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-         <DatePicker.MinimumDate>
+         <DatePicker.Format>ddMMMyyyy</DatePicker.Format>
+         <!--<DatePicker.MinimumDate>
             <sys:DateTime x:FactoryMethod="Parse">
                <x:Arguments>
                   <x:String>Jan 1 2010</x:String>
@@ -21,16 +21,9 @@
                   <x:String>Dec 31 2050</x:String>
                </x:Arguments>
             </sys:DateTime>
-         </DatePicker.MaximumDate>
+         </DatePicker.MaximumDate>-->
       </DatePicker>
-      <Entry Label="Notes:" />
-      <Editor>
-          <Editor.BackgroundColor>
-              <OnPlatform x:TypeArguments="x:Color"
-                  iOS="#a4eaff"
-                  Android="#2c3e50"
-                  WinPhone="#2c3e50" />
-          </Editor.BackgroundColor>
-      </Editor>
+      <Label Text="Notes:" />
+      <Editor />
   </StackLayout>
 </ContentPage>
