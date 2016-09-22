@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83
@@ -12,28 +12,16 @@ namespace WhenToDig83
         public App()
         {
 
-            var wtdTaskManager = new WTDTaskManager();
+         //   var wtdTaskManager = new WTDTaskManager();
 
-            wtdTaskManager.AddTask("Test", DateTime.Now, "Plant");
+          //  wtdTaskManager.AddTask("Test", DateTime.Now, "Plant");
 
-            var list = wtdTaskManager.GetTasks();
+           // var list = wtdTaskManager.GetTasks();
 
-            var task = wtdTaskManager.GetTasks(DateTime.Now.Month, DateTime.Now.Year);
+           // var task = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
             // The root page of your application
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
-            };
+            MainPage = new TaskPage();
         }
 
         protected override void OnStart()
