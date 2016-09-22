@@ -3,6 +3,7 @@ using SQLite.Net;
 using WhenToDig83.Data.Contracts;
 using WhenToDig83.Droid;
 using System.IO;
+using SQLite.Net.Async;
 
 [assembly: Xamarin.Forms.Dependency(typeof(DbConnection))]
 namespace WhenToDig83.Droid
@@ -13,6 +14,27 @@ namespace WhenToDig83.Droid
 
         public DbConnection()
         {
+        }
+
+        public SQLiteAsyncConnection GetAsyncConnection()
+        {
+            var dbpath = GetDatabasePath();
+
+            var platForm = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
+
+            var connectionFactory = new Func<SQLiteConnectionWithLock>(
+                () =>
+                {
+                    if (_conn == null)
+                    {
+                        _conn =
+                            new SQLiteConnectionWithLock(platForm,
+                                new SQLiteConnectionString(dbpath, storeDateTimeAsTicks: false));
+                    }
+                    return _conn;
+                });
+
+            return new SQLiteAsyncConnection(connectionFactory);
         }
 
         public SQLiteConnection GetConnection()

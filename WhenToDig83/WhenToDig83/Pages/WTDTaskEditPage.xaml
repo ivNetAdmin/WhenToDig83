@@ -12,8 +12,8 @@
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
     <StackLayout Orientation="Horizontal">
-      <Button Text="Cancel" HorizontalOptions="FillAndExpand" />
-      <Button Text="Save" HorizontalOptions="FillAndExpand" />
+      <Button Text="Cancel" HorizontalOptions="FillAndExpand" Command="{Binding Cancel}"/>
+      <Button Text="Save" HorizontalOptions="FillAndExpand" Command="{Binding Save}" />
     </StackLayout>
   </StackLayout>
 

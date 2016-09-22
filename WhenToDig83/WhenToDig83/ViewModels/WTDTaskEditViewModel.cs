@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using WhenToDig83.Managers;
+using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
@@ -8,15 +12,16 @@ namespace WhenToDig83.ViewModels
     public class WTDTaskEditViewModel : INotifyPropertyChanged, IPageLifeCycleEvents
     {
         private INavigation _navigation;
-        
+        private WTDTaskManager _wtdTaskManager;
+
         public event PropertyChangedEventHandler PropertyChanged;
         
         public WTDTaskEditViewModel(INavigation navigation)
         {
             _navigation = navigation;
             Date = DateTime.Now;
-            
-            var wtdTaskManager = new WTDTaskManager();
+
+            _wtdTaskManager = new WTDTaskManager();
 
             //var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
@@ -96,12 +101,18 @@ namespace WhenToDig83.ViewModels
         {
             get
             {
-                 return new Command(async () =>
+                // return new Command((nothing) =>
+                //{
+                //    _wtdTaskManager.AddTask(Name, Date, Notes);
+
+                //    Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 1]);
+                //});
+
+                return new Command(async () =>
                 {
-                    wtdTaskManager.Save(Name, Date, Notes);
+                    
                     await _navigation.PopModalAsync();
                 });
-                
             }
         }
         #endregion
