@@ -15,7 +15,7 @@
       </ListView.ItemTemplate>
     </ListView>
 
-    <Button Command="{Binding Save}"
+    <Button Command="{Binding New}"
             Text="New Task" />
   </StackLayout>
 </ContentPage>
