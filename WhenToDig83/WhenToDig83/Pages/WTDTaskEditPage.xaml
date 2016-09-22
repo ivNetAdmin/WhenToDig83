@@ -23,5 +23,14 @@
             </sys:DateTime>
          </DatePicker.MaximumDate>
       </DatePicker>
+      <Entry Label="Notes:" />
+      <Editor>
+          <Editor.BackgroundColor>
+              <OnPlatform x:TypeArguments="x:Color"
+                  iOS="#a4eaff"
+                  Android="#2c3e50"
+                  WinPhone="#2c3e50" />
+          </Editor.BackgroundColor>
+      </Editor>
   </StackLayout>
 </ContentPage>
