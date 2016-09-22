@@ -20,7 +20,7 @@ namespace WhenToDig83.Managers
             wtdTaskRepository.Insert(new WTDTask { Name = name, Date = date, Type = type });
         }
 
-        internal object GetTasksByMonth(int month, int year)
+        public List<WTDTask> GetTasksByMonth(int month, int year)
         {
             var startDate = new DateTime(year, month, 1);
             var endDate = new DateTime(year, month + 1, 1);
