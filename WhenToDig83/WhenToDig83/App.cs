@@ -18,7 +18,7 @@ namespace WhenToDig83
 
             var list = wtdTaskManager.GetTasks();
 
-            var task = wtdTaskManager.GetTasks(DateTime.Now.Month);
+            var task = wtdTaskManager.GetTasks(DateTime.Now.Month, DateTime.Now.Year);
 
             // The root page of your application
             MainPage = new ContentPage
