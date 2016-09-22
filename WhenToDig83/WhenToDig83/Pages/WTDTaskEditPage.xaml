@@ -11,9 +11,10 @@
     </DatePicker>
     <Label Text="Notes:" />
     <Editor />
+    <StackLayout Orientation="Horizontal">
+      <Button Text="Cancel" HorizontalOptions="FillAndExpand" />
+      <Button Text="Save" HorizontalOptions="FillAndExpand" />
+    </StackLayout>
   </StackLayout>
-  <StackLayout Orientation="Horizontal">
-    <Button Text="Cancel" />
-    <Button Text="Save" />
-  </StackLayout>
+
 </ContentPage>
