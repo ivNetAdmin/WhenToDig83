@@ -9,7 +9,7 @@ namespace WhenToDig83.Pages
         public WTDTaskPage()
         {
             InitializeComponent();
-            this.BindingContext = new WTDTaskViewModel();
+            this.BindingContext = new WTDTaskViewModel(this.Navigation);
         }
     }
 }
