@@ -51,7 +51,19 @@ namespace WhenToDig83.Data
 
         public List<T> Get<TValue>(Expression<Func<T, bool>> predicate = null, Expression<Func<T, TValue>> orderBy = null)
         {
-            throw new NotImplementedException();
+            var query = _connection.Table<T>();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+            if (orderBy != null)
+            {
+                query = query.OrderBy<TValue>(orderBy);
+            }
+
+            return query.ToList();
+
         }
 
         public int Insert(T entity)

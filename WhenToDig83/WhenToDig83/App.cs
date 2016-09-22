@@ -17,6 +17,9 @@ namespace WhenToDig83
             wtdTaskManager.AddTask("Test", DateTime.Now, "Plant");
 
             var list = wtdTaskManager.GetTasks();
+
+            var task = wtdTaskManager.GetTasks(DateTime.Now.Month);
+
             // The root page of your application
             MainPage = new ContentPage
             {
