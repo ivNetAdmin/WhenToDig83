@@ -44,6 +44,7 @@
       <DependentUpon>WTDTaskPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\WTDTaskEditViewModel.cs" />
     <Compile Include="ViewModels\WTDTaskViewModel.cs" />
     <Compile Include="Managers\WTDTaskManager.cs" />
   </ItemGroup>
