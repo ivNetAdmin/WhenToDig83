@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Data;
 
-namespace WhenToDig83
+namespace WhenToDig83.Managers
 {
     public class WTDTaskManager
     {

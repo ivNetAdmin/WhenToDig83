@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+using System.ComponentModel;
+using WhenToDig83.Managers;
 
 namespace WhenToDig83.ViewModels
 {
-    class WTDTaskViewModel
+    public class WTDTaskViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public WTDTaskViewModel()
+        {
+            var wtdTaskManager = new WTDTaskManager();
+
+            var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+        }
     }
 }
