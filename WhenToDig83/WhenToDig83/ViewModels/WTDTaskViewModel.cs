@@ -14,10 +14,14 @@ namespace WhenToDig83.ViewModels
 {
     public class WTDTaskViewModel : INotifyPropertyChanged
     {
+        private INavigation _navigation;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public WTDTaskViewModel()
+        public WTDTaskViewModel(INavigation navigation)
         {
+            _navigation = navigation;
+            
             var wtdTaskManager = new WTDTaskManager();
 
             var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
