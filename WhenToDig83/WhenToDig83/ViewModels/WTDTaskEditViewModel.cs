@@ -15,6 +15,7 @@ namespace WhenToDig83.ViewModels
         public WTDTaskEditViewModel(INavigation navigation)
         {
             _navigation = navigation;
+            Date = DateTime.Now;
             
             //var wtdTaskManager = new WTDTaskManager();
 
