@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.Pages
 {
-    public partial class TaskPage : ContentPage
+    public partial class WTDTaskPage : ContentPage
     {
-        public TaskPage()
+        public WTDTaskPage()
         {
             InitializeComponent();
             this.BindingContext = new WTDTaskViewModel();

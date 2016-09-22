@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Managers;
+using WhenToDig83.Pages;
+using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
@@ -22,6 +25,7 @@ namespace WhenToDig83.ViewModels
             WTDTasks = new ObservableCollection<WTDTask>(tasks);
         }
 
+        #region Properties
         private ObservableCollection<WTDTask> _wtdTasks;
         public ObservableCollection<WTDTask> WTDTasks
         {
@@ -33,5 +37,19 @@ namespace WhenToDig83.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
+        #region Events
+        public ICommand Save
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await Navigation.PushAsync(new WTDTaskEditPage());
+                });
+            }
+        }
+        #endregion
     }
 }

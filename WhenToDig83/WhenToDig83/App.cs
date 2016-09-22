@@ -12,16 +12,21 @@ namespace WhenToDig83
         public App()
         {
 
-         //   var wtdTaskManager = new WTDTaskManager();
+            //   var wtdTaskManager = new WTDTaskManager();
 
-          //  wtdTaskManager.AddTask("Test", DateTime.Now, "Plant");
+            //  wtdTaskManager.AddTask("Test", DateTime.Now, "Plant");
 
-           // var list = wtdTaskManager.GetTasks();
+            // var list = wtdTaskManager.GetTasks();
 
-           // var task = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+            // var task = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
             // The root page of your application
-            MainPage = new TaskPage();
+            MainPage = GetMainPage();
+        }
+
+        private Page GetMainPage()
+        {
+            return new NavigationPage(new WTDTaskPage());
         }
 
         protected override void OnStart()
