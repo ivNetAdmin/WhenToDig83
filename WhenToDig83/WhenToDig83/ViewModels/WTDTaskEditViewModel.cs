@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
@@ -32,7 +31,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _name = value;
-                RaisePropertyChanged(() => Name);
+                RaisePropertyChanged();
             }
         }
         
@@ -43,7 +42,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _date = value;
-                RaisePropertyChanged(() => Date);
+                RaisePropertyChanged();
             }
         }
         
@@ -54,7 +53,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _type = value;
-                RaisePropertyChanged(() => Type);
+                RaisePropertyChanged();
             }
         }
 
@@ -65,7 +64,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _notes = value;
-                RaisePropertyChanged(() => Notes);
+                RaisePropertyChanged();
             }
         }
         private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
