@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="WhenToDig83.Pages.WTDTaskEditPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+ 
   <StackLayout>
-    <Entry Placeholder="Task Name" />
-    <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+    <Entry Placeholder="Task Name" Text="{Binding Name}"/>
+    <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Date}">
          <DatePicker.Format>ddMMMyyyy</DatePicker.Format>
     </DatePicker>
     <Label Text="Notes:" />
-    <Editor />
+    <Editor Text="{Binding Notes}" />
     <StackLayout Orientation="Horizontal">
       <Button Text="Cancel" HorizontalOptions="FillAndExpand" />
       <Button Text="Save" HorizontalOptions="FillAndExpand" />
