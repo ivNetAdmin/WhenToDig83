@@ -1,6 +1,7 @@
 ﻿using SQLite.Net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using WhenToDig83.Data.Contracts;
 
@@ -32,7 +33,10 @@ namespace WhenToDig83.Data
 
         public List<T> Get()
         {
-            throw new NotImplementedException();
+            lock (locker)
+            {
+                return _connection.Table<T>().ToList();
+            }
         }
 
         public T Get(Expression<Func<T, bool>> predicate)
@@ -52,7 +56,10 @@ namespace WhenToDig83.Data
 
         public int Insert(T entity)
         {
-            throw new NotImplementedException();
+            lock (locker)
+            {
+                return _connection.Insert(entity);
+            } 
         }
 
         public int Update(T entity)
