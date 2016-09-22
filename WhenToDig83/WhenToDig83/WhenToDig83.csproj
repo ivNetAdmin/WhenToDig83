@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Contracts\IPageLifeCycleEvents.cs" />
     <Compile Include="Pages\WTDTaskEditPage.xaml.cs">
       <DependentUpon>WTDTaskEditPage.xaml</DependentUpon>
     </Compile>

@@ -1,7 +1,6 @@
 public interface IPageLifeCycleEvents
-    {
-        void OnAppearing();
-        //void OnDisappearing();
-        //void OnLayoutChanged();
-    }
+{
+    void OnAppearing();
+    //void OnDisappearing();
+    //void OnLayoutChanged();
 }
