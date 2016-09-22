@@ -20,10 +20,12 @@ namespace WhenToDig83
             wtdTaskRepository.Insert(new WTDTask { Name = name, Date = date, Type = type });
         }
 
-        internal object GetTasks(int month)
+        internal object GetTasks(int month, int year)
         {
-            return wtdTaskRepository.Get(predicate: x => x.Name == "Test", orderBy: x => x.Name);
-            return wtdTaskRepository.Get(predicate: x => x.Date.Month == month, orderBy: x => x.Date);
+            var startDate = new DateTime(year, month, 1);
+            var endDate = new DateTime(year, month + 1, 1);
+            //return wtdTaskRepository.Get(predicate: x => x.Name == "Test", orderBy: x => x.Name);
+            return wtdTaskRepository.Get(predicate: x => x.Date >= startDate && x.Date < endDate, orderBy: x => x.Date);
         }
 
         public List<WTDTask> GetTasks()
