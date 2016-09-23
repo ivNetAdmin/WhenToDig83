@@ -22,13 +22,7 @@ namespace WhenToDig83.ViewModels
         {
             _navigation = navigation;
             
-            var wtdTaskManager = new WTDTaskManager();
-
-            wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
-
-            var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
-
-            _wtdTasks = await new ObservableCollection<WTDTask>(tasks);
+            Task.Run(() => Init());
         }
 
         #region Properties
@@ -64,5 +58,18 @@ namespace WhenToDig83.ViewModels
             }
         }
         #endregion
+        
+        public async Task Init()
+        {
+            
+            var wtdTaskManager = new WTDTaskManager();
+
+            wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
+
+            var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+
+            WTDTasks = await new ObservableCollection<WTDTask>(tasks);
+            
+        }
     }
 }
