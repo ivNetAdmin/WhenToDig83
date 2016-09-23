@@ -7,43 +7,62 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
+using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    public class WTDTaskViewModel : INotifyPropertyChanged, IPageLifeCycleEvents
+    internal class WTDTaskViewModel : BaseModel
     {
         private INavigation _navigation;
-        
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public WTDTaskViewModel(INavigation navigation)
+        public WTDTaskViewModel()
         {
-            _navigation = navigation;
-            
-            Task.Run(() => Init());
         }
 
         #region Properties
+        private string _responseText;
+        public string ResponseText
+        {
+            get { return _responseText; }
+            set
+            {
+                _responseText = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<WTDTask> _wtdTasks;
         public ObservableCollection<WTDTask> WTDTasks
         {
             get { return _wtdTasks; }
-            set { _wtdTasks = value; RaisePropertyChanged(); }
-        }
-
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            set { _wtdTasks = value; OnPropertyChanged(); }
         }
         #endregion
 
         #region Page Events
-        public void OnAppearing()
+        protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
+            try
+            {
+                _navigation = AppHelper.CurrentPage().Navigation;
 
+                var wtdTaskManager = new WTDTaskManager();
+
+                wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
+
+                var tasks = await wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+
+                var x = new ObservableCollection<WTDTask>(tasks);
+
+                WTDTasks = x;
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
         }
         #endregion
 
@@ -59,16 +78,6 @@ namespace WhenToDig83.ViewModels
             }
         }
         #endregion
-        
-        public async void Init()
-        {
-            
-            var wtdTaskManager = new WTDTaskManager();
 
-            wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
-
-            WTDTasks = await new ObservableCollection<WTDTask>(wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year));
-            
-        }
     }
 }

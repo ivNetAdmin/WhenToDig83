@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
              x:Class="WhenToDig83.Pages.WTDTaskPage">
+  <ContentPage.BindingContext>
+    <models:WTDTaskViewModel />
+  </ContentPage.BindingContext>
   <StackLayout>
     <ListView x:Name="TaskListView"
               ItemsSource ="{Binding WTDTasks}">
