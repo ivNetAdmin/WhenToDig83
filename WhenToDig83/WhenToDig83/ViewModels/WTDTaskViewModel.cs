@@ -55,9 +55,7 @@ namespace WhenToDig83.ViewModels
 
                 var tasks = await wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
-                var x = new ObservableCollection<WTDTask>(tasks);
-
-                WTDTasks = x;
+                WTDTasks = new ObservableCollection<WTDTask>(tasks);
             }
             catch (Exception exception)
             {
