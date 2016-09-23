@@ -17,7 +17,7 @@ namespace WhenToDig83.Managers
             wtdTaskRepository = new RepositoryAsync<WTDTask>();
         }
 
-        public async void AddTask(string name, System.DateTime date, string type)
+        public async void AddTask(string name, DateTime date, string type)
         {
             await wtdTaskRepository.Insert(new WTDTask { Name = name, Date = date, Type = type });
         }

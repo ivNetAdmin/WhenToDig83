@@ -3,24 +3,34 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    public class WTDTaskEditViewModel : BaseModel
+    internal class WTDTaskEditViewModel : BaseModel
     {
         private INavigation _navigation;
         private WTDTaskManager _wtdTaskManager;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
+         
         public WTDTaskEditViewModel()
         {
         }
-        
+
         #region Properties
+        private string _responseText;
+        public string ResponseText
+        {
+            get { return _responseText; }
+            set
+            {
+                _responseText = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -67,13 +77,12 @@ namespace WhenToDig83.ViewModels
         #endregion
         
         #region Page Events
-         protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+         protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                
-                var wtdTaskManager = new WTDTaskManager();
+                _wtdTaskManager = new WTDTaskManager();
             }
             catch (Exception exception)
             {
@@ -100,6 +109,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
+                     _wtdTaskManager.AddTask(Name, Date, Type);
                     await _navigation.PopModalAsync();
                 });
             }

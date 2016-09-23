@@ -10,12 +10,6 @@ namespace WhenToDig83.Pages
         {
             InitializeComponent();
             ((BaseModel)BindingContext).Initialise(this);
-            //this.BindingContext = new WTDTaskViewModel(this.Navigation);
-        }
-
-        protected override void OnAppearing()
-        {          
-            base.OnAppearing();
-        }       
+        }           
     }
 }

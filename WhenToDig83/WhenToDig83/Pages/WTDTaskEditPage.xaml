@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
              x:Class="WhenToDig83.Pages.WTDTaskEditPage">
- 
+  <ContentPage.BindingContext>
+    <models:WTDTaskEditViewModel />
+  </ContentPage.BindingContext>
   <StackLayout>
     <Entry Placeholder="Task Name" Text="{Binding Name}"/>
     <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Date}">

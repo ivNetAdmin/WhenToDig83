@@ -1,10 +1,6 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Helpers;
@@ -17,6 +13,7 @@ namespace WhenToDig83.ViewModels
     internal class WTDTaskViewModel : BaseModel
     {
         private INavigation _navigation;
+        private WTDTaskManager _wtdTaskManager;
 
         public WTDTaskViewModel()
         {
@@ -48,13 +45,9 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
+                _wtdTaskManager = new WTDTaskManager();
 
-                var wtdTaskManager = new WTDTaskManager();
-
-                wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
-
-                var tasks = await wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
-
+                var tasks = await _wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
                 WTDTasks = new ObservableCollection<WTDTask>(tasks);
             }
             catch (Exception exception)
