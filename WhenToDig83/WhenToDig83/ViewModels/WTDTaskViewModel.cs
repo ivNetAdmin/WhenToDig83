@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Managers;
@@ -59,16 +60,14 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
         
-        public async Task Init()
+        public async void Init()
         {
             
             var wtdTaskManager = new WTDTaskManager();
 
             wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
 
-            var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
-
-            WTDTasks = await new ObservableCollection<WTDTask>(tasks);
+            WTDTasks = await new ObservableCollection<WTDTask>(wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year));
             
         }
     }

@@ -22,7 +22,7 @@ namespace WhenToDig83.Managers
             await wtdTaskRepository.Insert(new WTDTask { Name = name, Date = date, Type = type });
         }
 
-        public async Task<List<WTDTask>> GetTasksByMonth(int month, int year)
+        public async Task<IEnumerable<WTDTask>> GetTasksByMonth(int month, int year)
         {
             var startDate = new DateTime(year, month, 1);
             var endDate = new DateTime(year, month + 1, 1);
