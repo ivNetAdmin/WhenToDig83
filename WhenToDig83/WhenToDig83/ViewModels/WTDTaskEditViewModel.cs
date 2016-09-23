@@ -9,23 +9,15 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    public class WTDTaskEditViewModel : INotifyPropertyChanged, IPageLifeCycleEvents
+    public class WTDTaskEditViewModel : BaseModel
     {
         private INavigation _navigation;
         private WTDTaskManager _wtdTaskManager;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public WTDTaskEditViewModel(INavigation navigation)
+        public WTDTaskEditViewModel()
         {
-            _navigation = navigation;
-            Date = DateTime.Now;
-
-            _wtdTaskManager = new WTDTaskManager();
-
-            //var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
-
-            //WTDTasks = new ObservableCollection<WTDTask>(tasks);
         }
         
         #region Properties
@@ -36,7 +28,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _name = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
         
@@ -47,7 +39,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _date = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
         
@@ -58,7 +50,7 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _type = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -69,19 +61,24 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _notes = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
-        }
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
         
         #region Page Events
-        public void OnAppearing()
+         protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
-
+            try
+            {
+                _navigation = AppHelper.CurrentPage().Navigation;
+                
+                var wtdTaskManager = new WTDTaskManager();
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
         }
         #endregion
         
@@ -101,16 +98,8 @@ namespace WhenToDig83.ViewModels
         {
             get
             {
-                // return new Command((nothing) =>
-                //{
-                //    _wtdTaskManager.AddTask(Name, Date, Notes);
-
-                //    Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 1]);
-                //});
-
                 return new Command(async () =>
                 {
-                    
                     await _navigation.PopModalAsync();
                 });
             }
