@@ -17,6 +17,7 @@ namespace WhenToDig83.ViewModels
          
         public WTDTaskEditViewModel()
         {
+            Date = DateTime.Now;
         }
 
         #region Properties
@@ -109,8 +110,9 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                     _wtdTaskManager.AddTask(Name, Date, Type);
+                    await _wtdTaskManager.AddTask(Name, Date, Type);
                     await _navigation.PopModalAsync();
+                    MessagingCenter.Send(this, "TasksChanged");
                 });
             }
         }

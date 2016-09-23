@@ -13,6 +13,6 @@ namespace WhenToDig83.Helpers
                 ? Application.Current.MainPage
                 : navigationStack[
                     navigationStack.Count - 1];
-        }
+        }       
     }
 }

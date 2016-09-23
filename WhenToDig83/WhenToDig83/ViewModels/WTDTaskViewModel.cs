@@ -17,6 +17,10 @@ namespace WhenToDig83.ViewModels
 
         public WTDTaskViewModel()
         {
+            _wtdTaskManager = new WTDTaskManager();
+            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
+                GetTasks();
+            });
         }
 
         #region Properties
@@ -40,21 +44,20 @@ namespace WhenToDig83.ViewModels
         #endregion
 
         #region Page Events
-        protected override async void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+        protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                _wtdTaskManager = new WTDTaskManager();
-
-                var tasks = await _wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
-                WTDTasks = new ObservableCollection<WTDTask>(tasks);
+                GetTasks();                
             }
             catch (Exception exception)
             {
                 ResponseText = exception.ToString();
             }
         }
+
+   
         #endregion
 
         #region Events
@@ -69,6 +72,18 @@ namespace WhenToDig83.ViewModels
             }
         }
         #endregion
+
+        #region Messages             
+
+        #endregion
+
+        private async void GetTasks()
+        {
+            // _wtdTaskManager.AddTask("zozo", DateTime.Now, "");
+
+            var tasks = await _wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+            WTDTasks = new ObservableCollection<WTDTask>(tasks);
+        }
 
     }
 }
