@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WhenToDig83.Core.Entities;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using WhenToDig83.Pages;
@@ -14,9 +15,10 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private WTDTaskManager _wtdTaskManager;
-         
+
+
         public WTDTaskEditViewModel()
-        {
+        {            
             Date = DateTime.Now;
         }
 
@@ -81,7 +83,7 @@ namespace WhenToDig83.ViewModels
          protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             try
-            {
+            {             
                 _navigation = AppHelper.CurrentPage().Navigation;
                 _wtdTaskManager = new WTDTaskManager();
             }
@@ -90,8 +92,19 @@ namespace WhenToDig83.ViewModels
                 ResponseText = exception.ToString();
             }
         }
+        protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+               // MessagingCenter.Unsubscribe<WTDTaskViewModel, WTDTask>(this, "EditTask");
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
+        }
         #endregion
-        
+
         #region Events
         public ICommand Cancel
         {
@@ -111,8 +124,8 @@ namespace WhenToDig83.ViewModels
                 return new Command(async () =>
                 {
                     await _wtdTaskManager.AddTask(Name, Date, Type);
-                    await _navigation.PopModalAsync();
                     MessagingCenter.Send(this, "TasksChanged");
+                    await _navigation.PopModalAsync();                    
                 });
             }
         }

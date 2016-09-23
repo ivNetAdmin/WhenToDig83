@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Helpers;
@@ -13,14 +14,11 @@ namespace WhenToDig83.ViewModels
     internal class WTDTaskViewModel : BaseModel
     {
         private INavigation _navigation;
-        private WTDTaskManager _wtdTaskManager;
+        private WTDTaskManager _wtdTaskManager;        
 
         public WTDTaskViewModel()
         {
-            _wtdTaskManager = new WTDTaskManager();
-            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
-                GetTasks();
-            });
+            _wtdTaskManager = new WTDTaskManager();            
         }
 
         #region Properties
@@ -30,8 +28,28 @@ namespace WhenToDig83.ViewModels
             get { return _responseText; }
             set
             {
-                _responseText = value;
-                OnPropertyChanged();
+                if (_responseText != value)
+                {
+                    _responseText = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private WTDTask _selectedItem;
+        public WTDTask SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged();
+
+                    //MessagingCenter.Send(this, "EditTask", value);
+                    _navigation.PushModalAsync(new WTDTaskEditPage());
+                }
             }
         }
 
@@ -49,6 +67,11 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
+
+                MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
+                    GetTasks();
+                });
+
                 GetTasks();                
             }
             catch (Exception exception)
@@ -57,7 +80,17 @@ namespace WhenToDig83.ViewModels
             }
         }
 
-   
+        protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                MessagingCenter.Unsubscribe<WTDTaskEditViewModel>(this, "TasksChanged");
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
+        }
         #endregion
 
         #region Events
@@ -73,9 +106,7 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
-        #region Messages             
-
-        #endregion
+        #region Private
 
         private async void GetTasks()
         {
@@ -84,6 +115,7 @@ namespace WhenToDig83.ViewModels
             var tasks = await _wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
             WTDTasks = new ObservableCollection<WTDTask>(tasks);
         }
+        #endregion
 
     }
 }
