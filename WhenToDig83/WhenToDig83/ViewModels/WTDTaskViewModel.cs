@@ -24,9 +24,11 @@ namespace WhenToDig83.ViewModels
             
             var wtdTaskManager = new WTDTaskManager();
 
+            wtdTaskManager.AddTask("Hello mum", DateTime.Now, "Cultivate");
+
             var tasks = wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
 
-            WTDTasks = new ObservableCollection<WTDTask>(tasks);
+            _wtdTasks = await new ObservableCollection<WTDTask>(tasks);
         }
 
         #region Properties
