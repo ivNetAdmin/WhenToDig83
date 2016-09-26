@@ -41,7 +41,8 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                _navigation = AppHelper.CurrentPage().Navigation;               
+                _navigation = AppHelper.CurrentPage().Navigation; 
+                GetPlants();  
             }
             catch (Exception exception)
             {
@@ -66,6 +67,15 @@ namespace WhenToDig83.ViewModels
                    
                 });
             }
+        }
+        #endregion
+        
+        #region Private
+        private async void GetPlants()
+        {
+            _plantManager.AddPlant("Carrots");
+            var plants = await _plantManager.GetPlants();
+            Plants = new ObservableCollection<Plant>(plants);
         }
         #endregion
     }
