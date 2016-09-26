@@ -22,7 +22,7 @@ namespace WhenToDig83.Managers
             await _plantRepository.Insert(new Plant { Name = name });
         }
         
-        public async List<Plant> GetPlants()
+        public async Task<List<Plant>> GetPlants()
         { 
             return await _plantRepository.Get();
         }

@@ -53,7 +53,7 @@ namespace WhenToDig83.ViewModels
         }
 
         private ObservableCollection<Plant> _plants;
-        public ObservableCollection<WTDTask> Plants
+        public ObservableCollection<Plant> Plants
         {
             get { return _plants; }
             set { _plants = value; OnPropertyChanged(); }
