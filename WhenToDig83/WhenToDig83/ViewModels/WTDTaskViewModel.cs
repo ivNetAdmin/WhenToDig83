@@ -125,7 +125,6 @@ namespace WhenToDig83.ViewModels
         #endregion
 
         #region Private
-
         private async void GetTasks()
         {
             // _wtdTaskManager.AddTask("zozo", DateTime.Now, "");
@@ -134,6 +133,5 @@ namespace WhenToDig83.ViewModels
             WTDTasks = new ObservableCollection<WTDTask>(tasks);
         }
         #endregion
-
     }
 }
