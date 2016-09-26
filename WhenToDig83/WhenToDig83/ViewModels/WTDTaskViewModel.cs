@@ -71,8 +71,7 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                GetTasks();
-                ResponseText = "CurrentPageOnAppearing";
+                GetTasks();                
             }
             catch (Exception exception)
             {
@@ -116,7 +115,7 @@ namespace WhenToDig83.ViewModels
                     switch(paramter)
                     {                        
                         case "plant":
-                            await _navigation.PushModalAsync(new PlantPage());
+                            await _navigation.PushAsync(new PlantPage());
                             break;
                     }
                    

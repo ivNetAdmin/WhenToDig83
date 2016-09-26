@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,8 +19,23 @@ namespace WhenToDig83.ViewModels
         {
             _plantManager = new PlantManager();
         }
-        
-        
+
+        #region Properties
+        private string _responseText;
+        public string ResponseText
+        {
+            get { return _responseText; }
+            set
+            {
+                if (_responseText != value)
+                {
+                    _responseText = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+
         #region Page Events
         protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
@@ -45,7 +60,7 @@ namespace WhenToDig83.ViewModels
                     switch(paramter)
                     {
                         case "task":
-                            await _navigation.PushModalAsync(new WTDTaskPage());
+                            await _navigation.PushAsync(new WTDTaskPage());
                             break;                        
                     }
                    
