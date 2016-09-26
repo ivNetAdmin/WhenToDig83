@@ -114,10 +114,7 @@ namespace WhenToDig83.ViewModels
                 return new Command<string>(async (string paramter) =>
                 {
                     switch(paramter)
-                    {
-                        case "task":
-                            await _navigation.PushModalAsync(new WTDTaskPage());
-                            break;
+                    {                        
                         case "plant":
                             await _navigation.PushModalAsync(new PlantPage());
                             break;
