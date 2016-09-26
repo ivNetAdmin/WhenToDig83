@@ -1,12 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
+using WhenToDig83.Core.Enums;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
-using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
@@ -15,6 +12,7 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private WTDTaskManager _wtdTaskManager;
+        private NoteManager _noteManager;
         private WTDTask _selcectedTask;
 
 
@@ -22,13 +20,15 @@ namespace WhenToDig83.ViewModels
         {            
             Date = DateTime.Now;
 
-            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
+            _wtdTaskManager = new WTDTaskManager();
+            _noteManager = new NoteManager();
 
+            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
                 _selcectedTask = args;
                 Name = _selcectedTask.Name;
                 Date = _selcectedTask.Date;
                 Type = _selcectedTask.Type;
-                Notes = _selcectedTask.Notes;
+                Notes = _noteManager.GetNote((int)NoteType.Task, _selcectedTask.ID).Result.Notes;
             });
         }
 
@@ -95,7 +95,7 @@ namespace WhenToDig83.ViewModels
             try
             {             
                 _navigation = AppHelper.CurrentPage().Navigation;
-                _wtdTaskManager = new WTDTaskManager();                
+               
             }
             catch (Exception exception)
             {
@@ -133,7 +133,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await _wtdTaskManager.AddTask(Name, Date, Type, Notes, _selcectedTask == null ? 0 : _selcectedTask.ID);
+                    _wtdTaskManager.AddTask(Name, Date, Type, Notes, _selcectedTask == null ? 0 : _selcectedTask.ID);                   
                     MessagingCenter.Send(this, "TasksChanged");
                     await _navigation.PopModalAsync();                    
                 });

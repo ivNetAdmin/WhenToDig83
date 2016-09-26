@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using WhenToDig83.Core.Entities;
+using WhenToDig83.Core.Enums;
 using WhenToDig83.Data;
 
 namespace WhenToDig83.Managers
@@ -11,26 +11,43 @@ namespace WhenToDig83.Managers
     public class WTDTaskManager
     {
         private RepositoryAsync<WTDTask> _wtdTaskRepository;
+        private RepositoryAsync<Note> _noteRepository;
 
         public WTDTaskManager()
         {
             _wtdTaskRepository = new RepositoryAsync<WTDTask>();
+            _noteRepository = new RepositoryAsync<Note>();
         }
 
-        public async Task<int> AddTask(string name, DateTime date, string type, string notes, int taskId)
+        public async void AddTask(string name, DateTime date, string type, string notes, int taskId)
         {
             if (taskId == 0)
             {
-                return await _wtdTaskRepository.Insert(new WTDTask { Name = name, Date = date, Type = type, Notes = notes });
-            }else
+                var wtdTask = new WTDTask { Name = name, Date = date, Type = type };
+                await _wtdTaskRepository.Insert(wtdTask);
+                await _noteRepository.Insert(new Note { Type = (int)NoteType.Task, TypeId = wtdTask.ID, Notes = notes });
+            }
+            else
             {
-                var task = await _wtdTaskRepository.Get(taskId);
-                task.Name = name;
-                task.Type = type;
-                task.Date = date;
-                task.Notes = notes;
+                var wtdTask = await _wtdTaskRepository.Get(taskId);
+                wtdTask.Name = name;
+                wtdTask.Type = type;
+                wtdTask.Date = date;                
+                await _wtdTaskRepository.Update(wtdTask);
 
-                return await _wtdTaskRepository.Update(task);
+                var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Task && x.TypeId == taskId);
+
+                if (note == null)
+                {
+                   await _noteRepository.Insert(new Note { Type = (int)NoteType.Task, TypeId = taskId, Notes = notes });
+                }
+                else
+                {
+                    note.Type = (int)NoteType.Task;
+                    note.TypeId = taskId;
+                    note.Notes = notes;
+                    await _noteRepository.Update(note);
+                }
             }
         }
 

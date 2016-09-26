@@ -37,9 +37,14 @@ namespace WhenToDig83.Data
             throw new NotImplementedException();
         }
 
-        public Task<T> Get(Expression<Func<T, bool>> predicate)
+        public async Task<T> Get(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            T task;
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                task = await _connection.FindAsync<T>(predicate).ConfigureAwait(false);
+            }
+            return task;
         }
 
         public async Task<T> Get(int id)
