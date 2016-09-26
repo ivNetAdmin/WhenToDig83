@@ -8,7 +8,7 @@
   </ContentPage.BindingContext>
   
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
-    <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
+    <ToolbarItem Name="Task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
   </ContentPage.ToolbarItems>
     
