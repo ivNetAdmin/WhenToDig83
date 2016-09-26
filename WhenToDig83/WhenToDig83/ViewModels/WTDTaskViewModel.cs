@@ -106,6 +106,28 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
+        #region Navigation Events
+        public ICommand ToolbarNavigationCommand
+        {
+            get
+            {
+                return new Command<string>(async (string paramter) =>
+                {
+                    switch(paramter)
+                    {
+                        case "task":
+                            await _navigation.PushModalAsync(new WTDTaskPage());
+                            break;
+                        case "plant":
+                            await _navigation.PushModalAsync(new PlantPage());
+                            break;
+                    }
+                   
+                });
+            }
+        }
+        #endregion
+
         #region Private
 
         private async void GetTasks()

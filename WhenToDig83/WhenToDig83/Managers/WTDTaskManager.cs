@@ -19,7 +19,7 @@ namespace WhenToDig83.Managers
             _noteRepository = new RepositoryAsync<Note>();
         }
 
-        public async void AddTask(string name, DateTime date, string type, string notes, int taskId)
+        public async void AddTask(string name, DateTime date, int type, string notes, int taskId)
         {
             if (taskId == 0)
             {

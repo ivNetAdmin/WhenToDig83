@@ -28,7 +28,9 @@ namespace WhenToDig83.ViewModels
                 Name = _selcectedTask.Name;
                 Date = _selcectedTask.Date;
                 Type = _selcectedTask.Type;
-                Notes = _noteManager.GetNote((int)NoteType.Task, _selcectedTask.ID).Result.Notes;
+
+                var notesResult = _noteManager.GetNote((int)NoteType.Task, _selcectedTask.ID).Result;
+                Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
         }
 
@@ -66,8 +68,8 @@ namespace WhenToDig83.ViewModels
             }
         }
         
-        private string _type;
-        public string Type
+        private int _type;
+        public int Type
         {
             get { return _type; }
             set
@@ -133,7 +135,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _wtdTaskManager.AddTask(Name, Date, Type, Notes, _selcectedTask == null ? 0 : _selcectedTask.ID);                   
+                    _wtdTaskManager.AddTask(Name, Date, (int)WTDTaskType.Cultivate, Notes, _selcectedTask == null ? 0 : _selcectedTask.ID);                   
                     MessagingCenter.Send(this, "TasksChanged");
                     await _navigation.PopModalAsync();                    
                 });

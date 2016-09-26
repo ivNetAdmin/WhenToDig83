@@ -2,12 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
-          
              x:Class="WhenToDig83.Pages.WTDTaskPage">
   <ContentPage.BindingContext>
     <models:WTDTaskViewModel />
   </ContentPage.BindingContext>
-  <StackLayout>
+  
+  <ContentPage.ToolbarItems  VerticalOptions = "Start">
+    <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
+    <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
+  </ContentPage.ToolbarItems>
+    
+    <StackLayout>
     
 <Label Text="{Binding ResponseText}" />
 
