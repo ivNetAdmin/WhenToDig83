@@ -32,9 +32,14 @@ namespace WhenToDig83.Data
             throw new NotImplementedException();
         }
 
-        public Task<List<T>> Get()
+       public async Task<List<T>> Get()
         {
-            throw new NotImplementedException();
+            List<T> entityList = new List<T>();
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                entityList = await _connection.Table<T>().ToListAsync().ConfigureAwait(false);
+            }
+            return entityList;           
         }
 
         public async Task<T> Get(Expression<Func<T, bool>> predicate)
