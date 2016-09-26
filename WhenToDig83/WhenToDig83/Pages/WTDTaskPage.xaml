@@ -8,10 +8,12 @@
     <models:WTDTaskViewModel />
   </ContentPage.BindingContext>
   <StackLayout>
+    
+<Label Text="{Binding ResponseText}" />
+
     <ListView x:Name="TaskListView"
               ItemsSource="{Binding WTDTasks}"
               SelectedItem="{Binding SelectedItem}" >
-     
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

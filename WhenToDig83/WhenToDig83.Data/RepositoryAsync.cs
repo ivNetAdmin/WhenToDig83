@@ -42,9 +42,12 @@ namespace WhenToDig83.Data
             throw new NotImplementedException();
         }
 
-        public Task<T> Get(int id)
+        public async Task<T> Get(int id)
         {
-            throw new NotImplementedException();
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                return await _connection.FindAsync<T>(id).ConfigureAwait(false);
+            }
         }
 
         public async Task<List<T>> Get<TValue>(Expression<Func<T, bool>> predicate = null, Expression<Func<T, TValue>> orderBy = null)
@@ -73,9 +76,14 @@ namespace WhenToDig83.Data
             return entityId;
         }
 
-        public Task<int> Update(T entity)
+        public async Task<int> Update(T entity)
         {
-            throw new NotImplementedException();
+            int entityId = 0;
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                entityId = await _connection.UpdateAsync(entity).ConfigureAwait(false);
+            }
+            return entityId;
         }
 
         private async void Initialise()

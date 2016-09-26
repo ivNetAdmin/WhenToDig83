@@ -15,11 +15,21 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private WTDTaskManager _wtdTaskManager;
+        private WTDTask _selcectedTask;
 
 
         public WTDTaskEditViewModel()
         {            
             Date = DateTime.Now;
+
+            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
+
+                _selcectedTask = args;
+                Name = _selcectedTask.Name;
+                Date = _selcectedTask.Date;
+                Type = _selcectedTask.Type;
+                Notes = _selcectedTask.Notes;
+            });
         }
 
         #region Properties
@@ -85,7 +95,7 @@ namespace WhenToDig83.ViewModels
             try
             {             
                 _navigation = AppHelper.CurrentPage().Navigation;
-                _wtdTaskManager = new WTDTaskManager();
+                _wtdTaskManager = new WTDTaskManager();                
             }
             catch (Exception exception)
             {
@@ -96,7 +106,7 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-               // MessagingCenter.Unsubscribe<WTDTaskViewModel, WTDTask>(this, "EditTask");
+                MessagingCenter.Unsubscribe<WTDTaskViewModel, WTDTask>(this, "EditTask");
             }
             catch (Exception exception)
             {
@@ -123,7 +133,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await _wtdTaskManager.AddTask(Name, Date, Type);
+                    await _wtdTaskManager.AddTask(Name, Date, Type, Notes, _selcectedTask == null ? 0 : _selcectedTask.ID);
                     MessagingCenter.Send(this, "TasksChanged");
                     await _navigation.PopModalAsync();                    
                 });

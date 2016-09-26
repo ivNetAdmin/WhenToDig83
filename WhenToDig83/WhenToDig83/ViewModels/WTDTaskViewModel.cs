@@ -18,7 +18,11 @@ namespace WhenToDig83.ViewModels
 
         public WTDTaskViewModel()
         {
-            _wtdTaskManager = new WTDTaskManager();            
+            _wtdTaskManager = new WTDTaskManager();
+
+            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
+                GetTasks();
+            });
         }
 
         #region Properties
@@ -46,9 +50,9 @@ namespace WhenToDig83.ViewModels
                 {
                     _selectedItem = value;
                     OnPropertyChanged();
-
-                    //MessagingCenter.Send(this, "EditTask", value);
+                    
                     _navigation.PushModalAsync(new WTDTaskEditPage());
+                     MessagingCenter.Send(this, "EditTask", value);
                 }
             }
         }
@@ -67,12 +71,8 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-
-                MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
-                    GetTasks();
-                });
-
-                GetTasks();                
+                GetTasks();
+                ResponseText = "CurrentPageOnAppearing";
             }
             catch (Exception exception)
             {
