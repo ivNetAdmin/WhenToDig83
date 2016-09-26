@@ -34,6 +34,30 @@ namespace WhenToDig83.ViewModels
                 }
             }
         }
+        
+        private Plant _selectedItem;
+        public Plant SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged();
+                    
+                    //_navigation.PushModalAsync(new WTDTaskEditPage());
+                    // MessagingCenter.Send(this, "EditTask", value);
+                }
+            }
+        }
+
+        private ObservableCollection<Plant> _plants;
+        public ObservableCollection<WTDTask> Plants
+        {
+            get { return _plants; }
+            set { _plants = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Page Events
