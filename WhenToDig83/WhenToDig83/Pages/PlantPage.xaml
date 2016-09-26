@@ -12,4 +12,24 @@
     <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
     <ToolbarItem Name="Plant"/>
   </ContentPage.ToolbarItems>
+  
+  <StackLayout>
+    
+<Label Text="{Binding ResponseText}" />
+
+    <ListView x:Name="PlantListView"
+              ItemsSource="{Binding Plants}"
+              SelectedItem="{Binding SelectedItem}" >
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Label Text="{Binding Name}" />
+          </ViewCell>          
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <Button Command="{Binding New}"
+            Text="New Plant" />
+  </StackLayout>
 </ContentPage>
