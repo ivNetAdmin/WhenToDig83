@@ -20,7 +20,7 @@ namespace WhenToDig83.ViewModels
         {
             _wtdTaskManager = new WTDTaskManager();
 
-            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TasksChanged", (message) => {
+            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TaskChanged", (message) => {
                 GetTasks();
             });
         }
@@ -83,7 +83,7 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                MessagingCenter.Unsubscribe<WTDTaskEditViewModel>(this, "TasksChanged");
+                MessagingCenter.Unsubscribe<WTDTaskEditViewModel>(this, "TaskChanged");
             }
             catch (Exception exception)
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Core.Enums;
@@ -8,28 +9,24 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    internal class WTDTaskEditViewModel : BaseModel
+    internal class PlantEditViewModel : BaseModel
     {
         private INavigation _navigation;
-        private WTDTaskManager _wtdTaskManager;
+        private PlantManager _plantManager;
         private NoteManager _noteManager;
-        private WTDTask _selectedTask;
+        private Plant _selectedPlant;
 
-
-        public WTDTaskEditViewModel()
-        {            
-            Date = DateTime.Now;
-
-            _wtdTaskManager = new WTDTaskManager();
+        public PlantEditViewModel()
+        {
+            _plantManager = new PlantManager();
             _noteManager = new NoteManager();
 
-            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
-                _selectedTask = args;
-                Name = _selectedTask.Name;
-                Date = _selectedTask.Date;
-                Type = _selectedTask.Type;
+            MessagingCenter.Subscribe<PlantViewModel, Plant>(this, "EditPlant", (message, args) => {
+                _selectedPlant = args;
+                Name = _selectedPlant.Name;
+              
 
-                var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
+                var notesResult = _noteManager.GetNote((int)NoteType.Plant, _selectedPlant.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
         }
@@ -56,28 +53,6 @@ namespace WhenToDig83.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        private DateTime _date;
-        public DateTime Date
-        {
-            get { return _date; }
-            set
-            {
-                _date = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        private int _type;
-        public int Type
-        {
-            get { return _type; }
-            set
-            {
-                _type = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string _notes;
         public string Notes
@@ -90,14 +65,14 @@ namespace WhenToDig83.ViewModels
             }
         }
         #endregion
-        
+
         #region Page Events
-         protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+        protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             try
-            {             
+            {
                 _navigation = AppHelper.CurrentPage().Navigation;
-               
+
             }
             catch (Exception exception)
             {
@@ -108,7 +83,7 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                MessagingCenter.Unsubscribe<WTDTaskViewModel, WTDTask>(this, "EditTask");
+                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "EditPlant");
             }
             catch (Exception exception)
             {
@@ -128,16 +103,16 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
-        
+
         public ICommand Save
         {
             get
             {
                 return new Command(async () =>
                 {
-                    _wtdTaskManager.AddTask(Name, Date, (int)WTDTaskType.Cultivate, Notes, _selectedTask == null ? 0 : _selectedTask.ID);                   
-                    MessagingCenter.Send(this, "TaskChanged");
-                    await _navigation.PopModalAsync();                    
+                    _plantManager.AddPlant(Name);
+                    MessagingCenter.Send(this, "PlantChanged");
+                    await _navigation.PopModalAsync();
                 });
             }
         }

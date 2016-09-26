@@ -40,6 +40,9 @@
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Managers\NoteManager.cs" />
     <Compile Include="Managers\PlantManager.cs" />
+    <Compile Include="Pages\PlantEditPage.xaml.cs">
+      <DependentUpon>PlantEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PlantPage.xaml.cs">
       <DependentUpon>PlantPage.xaml</DependentUpon>
     </Compile>
@@ -51,6 +54,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseModel.cs" />
+    <Compile Include="ViewModels\PlantEditViewModel.cs" />
     <Compile Include="ViewModels\PlantViewModel.cs" />
     <Compile Include="ViewModels\WTDTaskEditViewModel.cs" />
     <Compile Include="ViewModels\WTDTaskViewModel.cs" />
@@ -112,6 +116,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\PlantPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\PlantEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

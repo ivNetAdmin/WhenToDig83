@@ -18,6 +18,10 @@ namespace WhenToDig83.ViewModels
         public PlantViewModel()
         {
             _plantManager = new PlantManager();
+
+            MessagingCenter.Subscribe<PlantEditViewModel>(this, "PlantChanged", (message) => {
+                GetPlants();
+            });
         }
 
         #region Properties
@@ -46,8 +50,8 @@ namespace WhenToDig83.ViewModels
                     _selectedItem = value;
                     OnPropertyChanged();
                     
-                    //_navigation.PushModalAsync(new WTDTaskEditPage());
-                    // MessagingCenter.Send(this, "EditTask", value);
+                    _navigation.PushModalAsync(new PlantEditPage());
+                     MessagingCenter.Send(this, "EditPlant", value);
                 }
             }
         }
@@ -74,7 +78,20 @@ namespace WhenToDig83.ViewModels
             }
         }
         #endregion
-        
+
+        #region Events
+        public ICommand New
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await _navigation.PushModalAsync(new PlantEditPage());
+                });
+            }
+        }
+        #endregion
+
         #region Navigation Events
         public ICommand ToolbarNavigationCommand
         {
