@@ -77,6 +77,18 @@ namespace WhenToDig83.ViewModels
                 ResponseText = exception.ToString();
             }
         }
+
+        protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "PlantChanged");
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
+        }
         #endregion
 
         #region Events
@@ -113,8 +125,7 @@ namespace WhenToDig83.ViewModels
         
         #region Private
         private async void GetPlants()
-        {
-            _plantManager.AddPlant("Carrots");
+        {           
             var plants = await _plantManager.GetPlants();
             Plants = new ObservableCollection<Plant>(plants);
         }

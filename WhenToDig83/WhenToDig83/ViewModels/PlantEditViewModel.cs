@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Core.Enums;
@@ -25,7 +26,6 @@ namespace WhenToDig83.ViewModels
                 _selectedPlant = args;
                 Name = _selectedPlant.Name;
               
-
                 var notesResult = _noteManager.GetNote((int)NoteType.Plant, _selectedPlant.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
@@ -64,6 +64,30 @@ namespace WhenToDig83.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private Variety _selectedItem;
+        public Variety SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged();
+
+                   // _navigation.PushModalAsync(new PlantEditPage());
+                    //MessagingCenter.Send(this, "EditPlant", value);
+                }
+            }
+        }
+
+        private ObservableCollection<Variety> _varieties;
+        public ObservableCollection<Variety> Varieties
+        {
+            get { return _varieties; }
+            set { _varieties = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Page Events
@@ -72,6 +96,10 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
+                if (_selectedPlant != null)
+                {
+                    GetVarieties();
+                }
 
             }
             catch (Exception exception)
@@ -109,12 +137,20 @@ namespace WhenToDig83.ViewModels
             get
             {
                 return new Command(async () =>
-                {
-                    _plantManager.AddPlant(Name);
+                {                   
+                    _plantManager.AddPlant(Name,  Notes, _selectedPlant == null ? 0 : _selectedPlant.ID);
                     MessagingCenter.Send(this, "PlantChanged");
                     await _navigation.PopModalAsync();
                 });
             }
+        }
+        #endregion
+
+        #region Private
+        private async void GetVarieties()
+        {
+            var varieties = await _plantManager.GetVarieties(_selectedPlant.ID);
+            Varieties = new ObservableCollection<Variety>(varieties);
         }
         #endregion
     }
