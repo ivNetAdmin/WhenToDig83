@@ -6,6 +6,7 @@ using WhenToDig83.Core.Entities;
 using WhenToDig83.Core.Enums;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
+using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
@@ -121,6 +122,17 @@ namespace WhenToDig83.ViewModels
         #endregion
 
         #region Events
+        public ICommand NewVariety
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await _navigation.PushModalAsync(new VarietyEditPage());
+                });
+            }
+        }
+
         public ICommand Cancel
         {
             get

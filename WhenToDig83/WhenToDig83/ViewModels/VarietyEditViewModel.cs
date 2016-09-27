@@ -6,12 +6,12 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
 {
-    internal class VarietyViewModel : BaseModel
+    internal class VarietyEditViewModel : BaseModel
     {
         private INavigation _navigation;
         private PlantManager _plantManager;
 
-        public VarietyViewModel()
+        public VarietyEditViewModel()
         {
             _plantManager = new PlantManager();
 

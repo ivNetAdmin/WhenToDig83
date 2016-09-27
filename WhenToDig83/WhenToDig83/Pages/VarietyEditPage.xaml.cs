@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace WhenToDig83.Pages
 {
-    public partial class PlantPage : ContentPage
+    public partial class VarietyEditPage : ContentPage
     {
-        public PlantPage()
+        public VarietyEditPage()
         {
             InitializeComponent();
             ((BaseModel)BindingContext).Initialise(this);

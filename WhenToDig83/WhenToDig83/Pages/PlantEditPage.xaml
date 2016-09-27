@@ -11,7 +11,9 @@
     <Entry Placeholder="Plant Name" Text="{Binding Name}"/>
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
-    
+    <StackLayout Orientation="Horizontal">
+      <Button Text="New Variety" HorizontalOptions="FillAndExpand" Command="{Binding NewVariety}"/>
+    </StackLayout>
        <ListView x:Name="VarietyListView"
               ItemsSource="{Binding Varieties}"
               SelectedItem="{Binding SelectedItem}" >
