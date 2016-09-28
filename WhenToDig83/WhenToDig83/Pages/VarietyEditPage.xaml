@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
              x:Class="WhenToDig83.Pages.VarietyEditPage">
-  
+
+  <ContentPage.BindingContext>
+    <models:VarietyEditViewModel />
+  </ContentPage.BindingContext>
+
+ <StackLayout>
+    <Entry Placeholder="Variety Name" Text="{Binding Name}"/>
+    <Label Text="Notes:" />
+    <Editor Text="{Binding Notes}" />
+   
+    <StackLayout Orientation="Horizontal">
+      <Button Text="Cancel" HorizontalOptions="FillAndExpand" Command="{Binding Cancel}"/>
+      <Button Text="Save" HorizontalOptions="FillAndExpand" Command="{Binding Save}" />
+    </StackLayout>
+  </StackLayout>
+
 </ContentPage>

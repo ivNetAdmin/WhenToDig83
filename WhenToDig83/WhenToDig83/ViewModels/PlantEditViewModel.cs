@@ -29,6 +29,8 @@ namespace WhenToDig83.ViewModels
               
                 var notesResult = _noteManager.GetNote((int)NoteType.Plant, _selectedPlant.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
+
+                GetVarieties();
             });
         }
 
@@ -97,10 +99,10 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                if (_selectedPlant != null)
-                {
-                    GetVarieties();
-                }
+                //if (_selectedPlant != null)
+                //{
+                //    GetVarieties();
+                //}
 
             }
             catch (Exception exception)

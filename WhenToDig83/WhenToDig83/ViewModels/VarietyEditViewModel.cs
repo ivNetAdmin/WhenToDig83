@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Windows.Input;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using Xamarin.Forms;
@@ -27,11 +28,30 @@ namespace WhenToDig83.ViewModels
             get { return _responseText; }
             set
             {
-                if (_responseText != value)
-                {
-                    _responseText = value;
-                    OnPropertyChanged();
-                }
+                _responseText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _notes;
+        public string Notes
+        {
+            get { return _notes; }
+            set
+            {
+                _notes = value;
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -61,6 +81,33 @@ namespace WhenToDig83.ViewModels
         //        ResponseText = exception.ToString();
         //    }
         //}
+        #endregion
+
+        #region Events
+   
+        public ICommand Cancel
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await _navigation.PopModalAsync();
+                });
+            }
+        }
+
+        public ICommand Save
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                  //  _plantManager.AddVariety(Name, Notes, _selectedPlant == null ? 0 : _selectedPlant.ID);
+                  //  MessagingCenter.Send(this, "VarietyChanged");
+                    await _navigation.PopModalAsync();
+                });
+            }
+        }
         #endregion
     }
 }

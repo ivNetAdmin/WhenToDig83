@@ -17,6 +17,7 @@ namespace WhenToDig83.Managers
         public PlantManager()
         {
             _plantRepository = new RepositoryAsync<Plant>();
+            _varietyRepository = new RepositoryAsync<Variety>();
             _noteRepository = new RepositoryAsync<Note>();
         }
         
@@ -27,6 +28,9 @@ namespace WhenToDig83.Managers
 
         public async Task<List<Variety>> GetVarieties(int plantId)
         {
+            await _varietyRepository.Insert(new Variety { Name = "Variety 1", PlantId = plantId });
+            await _varietyRepository.Insert(new Variety { Name = "Variety 2", PlantId = plantId });
+            await _varietyRepository.Insert(new Variety { Name = "Variety 3", PlantId = plantId });
             return await _varietyRepository.Get(predicate: x => x.PlantId == plantId, orderBy: x => x.Name);
         }
 
