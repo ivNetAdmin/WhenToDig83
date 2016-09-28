@@ -15,7 +15,6 @@ namespace WhenToDig83.ViewModels
         private NoteManager _noteManager;
         private WTDTask _selectedTask;
 
-
         public WTDTaskEditViewModel()
         {            
             Date = DateTime.Now;
