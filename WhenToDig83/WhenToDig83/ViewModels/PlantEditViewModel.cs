@@ -32,6 +32,10 @@ namespace WhenToDig83.ViewModels
 
                 GetVarieties();
             });
+            
+            MessagingCenter.Subscribe<VarietyEditViewModel>(this, "VarietyChanged", (message) => {
+                GetVarieties();
+            });
         }
 
         #region Properties
