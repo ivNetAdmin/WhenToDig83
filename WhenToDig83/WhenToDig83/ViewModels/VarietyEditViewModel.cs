@@ -13,13 +13,15 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private PlantManager _plantManager;
+        private NoteManager _noteManager;
         private Variety _selectedVariety;
         
         public VarietyEditViewModel()
         {
             _plantManager = new PlantManager();
+            _noteManager =  new NoteManager();
 
-             MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "EditVariety", (message, args) => {
+             MessagingCenter.Subscribe<PlantEditViewModel, Variety>(this, "EditVariety", (message, args) => {
                 _selectedVariety = args;
                 Name = _selectedVariety.Name;
               
