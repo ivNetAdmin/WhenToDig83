@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Windows.Input;
+using WhenToDig83.Core.Entities;
+using WhenToDig83.Core.Enums;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using Xamarin.Forms;
