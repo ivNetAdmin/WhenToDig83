@@ -11,14 +11,19 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private PlantManager _plantManager;
-
+        private Variety _selectedVariety;
+        
         public VarietyEditViewModel()
         {
             _plantManager = new PlantManager();
 
-            //MessagingCenter.Subscribe<PlantEditViewModel>(this, "PlantChanged", (message) => {
-            //    GetPlants();
-            //});
+             MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "EditVariety", (message, args) => {
+                _selectedVariety = args;
+                Name = _selectedVariety.Name;
+              
+                var notesResult = _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID).Result;
+                Notes = notesResult == null ? string.Empty : notesResult.Notes;
+            });
         }
 
         #region Properties
@@ -62,7 +67,6 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                //GetPlants();
             }
             catch (Exception exception)
             {
@@ -70,17 +74,17 @@ namespace WhenToDig83.ViewModels
             }
         }
 
-        //protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs)
-        //{
-        //    try
-        //    {
-        //        MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "PlantChanged");
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        ResponseText = exception.ToString();
-        //    }
-        //}
+        protected override void CurrentPageOnDisappearing(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "EditVariety");
+            }
+            catch (Exception exception)
+            {
+                ResponseText = exception.ToString();
+            }
+        }
         #endregion
 
         #region Events
@@ -102,8 +106,8 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                  //  _plantManager.AddVariety(Name, Notes, _selectedPlant == null ? 0 : _selectedPlant.ID);
-                  //  MessagingCenter.Send(this, "VarietyChanged");
+                    _plantManager.AddVariety(Name, Notes, _selectedVariety == null ? 0 : _selectedVariety.ID);
+                    MessagingCenter.Send(this, "VarietyChanged");
                     await _navigation.PopModalAsync();
                 });
             }
