@@ -129,7 +129,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    MessagingCenter.Send<Plant>(this, "Plant", _selectedPlant);
+                    MessagingCenter.Send(this, "Plant", _selectedPlant);
                     await _navigation.PushModalAsync(new VarietyEditPage());
                 });
             }
