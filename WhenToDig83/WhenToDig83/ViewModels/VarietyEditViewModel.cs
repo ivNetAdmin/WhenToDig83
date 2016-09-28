@@ -14,13 +14,18 @@ namespace WhenToDig83.ViewModels
         private INavigation _navigation;
         private PlantManager _plantManager;
         private NoteManager _noteManager;
+        private Plant _selectedPlant;
         private Variety _selectedVariety;
         
         public VarietyEditViewModel()
         {
             _plantManager = new PlantManager();
             _noteManager =  new NoteManager();
-
+ 
+            MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "EditVariety", (message, args) => {
+                _selectedPlant = args;             
+            });
+            
              MessagingCenter.Subscribe<PlantEditViewModel, Variety>(this, "EditVariety", (message, args) => {
                 _selectedVariety = args;
                 Name = _selectedVariety.Name;
@@ -110,7 +115,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _plantManager.AddVariety(Name, Notes, _selectedVariety == null ? 0 : _selectedVariety.ID);
+                    _plantManager.AddVariety(Name, Notes, _selectedPlant.ID, _selectedVariety == null ? 0 : _selectedVariety.ID);
                     MessagingCenter.Send(this, "VarietyChanged");
                     await _navigation.PopModalAsync();
                 });
