@@ -79,8 +79,8 @@ namespace WhenToDig83.ViewModels
                     _selectedItem = value;
                     OnPropertyChanged();
 
-                   // _navigation.PushModalAsync(new PlantEditPage());
-                    //MessagingCenter.Send(this, "EditPlant", value);
+                    _navigation.PushModalAsync(new VarietyEditPage());
+                    MessagingCenter.Send(this, "EditVariety", value);
                 }
             }
         }
@@ -99,11 +99,6 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
-                //if (_selectedPlant != null)
-                //{
-                //    GetVarieties();
-                //}
-
             }
             catch (Exception exception)
             {
