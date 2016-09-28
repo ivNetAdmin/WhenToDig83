@@ -63,31 +63,31 @@ namespace WhenToDig83.Managers
                 }
             }
         }
-
-        internal async void AddVariety(string name, string notes, int plantId)
+       
+        internal async void AddVariety(string name, string notes, int plantId, int varietyId)
         {
-            if (plantId == 0)
+            if (varietyId == 0)
             {
-                var plant = new Plant { Name = name };
-                await _plantRepository.Insert(plant);
-                await _noteRepository.Insert(new Note { Type = (int)NoteType.Plant, TypeId = plant.ID, Notes = notes });
+                var variety = new Variety { Name = name, PlantId = plantId };
+                await _varietyRepository.Insert(variety);
+                await _noteRepository.Insert(new Note { Type = (int)NoteType.Variety, TypeId = variety.ID, Notes = notes });
             }
             else
             {
-                var plant = await _plantRepository.Get(plantId);
-                plant.Name = name;
-                await _plantRepository.Update(plant);
+                var variety = await _varietyRepository.Get(varietyId);
+                variety.Name = name;
+                await _varietyRepository.Update(variety);
 
-                var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Plant && x.TypeId == plantId);
+                var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Variety && x.TypeId == varietyId);
 
                 if (note == null)
                 {
-                    await _noteRepository.Insert(new Note { Type = (int)NoteType.Plant, TypeId = plantId, Notes = notes });
+                    await _noteRepository.Insert(new Note { Type = (int)NoteType.Variety, TypeId = varietyId, Notes = notes });
                 }
                 else
                 {
-                    note.Type = (int)NoteType.Plant;
-                    note.TypeId = plantId;
+                    note.Type = (int)NoteType.Variety;
+                    note.TypeId = varietyId;
                     note.Notes = notes;
                     await _noteRepository.Update(note);
                 }
