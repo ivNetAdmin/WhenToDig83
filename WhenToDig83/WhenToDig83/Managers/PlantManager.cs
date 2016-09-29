@@ -60,7 +60,12 @@ namespace WhenToDig83.Managers
                 }
             }
         }
-       
+
+        public async Task<Plant> GetPlant(int plantId)
+        {
+            return await _plantRepository.Get(plantId);
+        }
+
         internal async void AddVariety(string name, string notes, int plantId, int varietyId)
         {
             if (varietyId == 0)

@@ -23,16 +23,18 @@ namespace WhenToDig83.ViewModels
             _noteManager =  new NoteManager();
  
             MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "Plant", (message, args) => {
-                _selectedPlant = args;             
+                _selectedPlant = args;
+                PlantName = _selectedPlant.Name;          
             });
             
              MessagingCenter.Subscribe<PlantEditViewModel, Variety>(this, "EditVariety", (message, args) => {
                 _selectedVariety = args;
                 Name = _selectedVariety.Name;
               
-               //_selectedPlant=_plantManager.GetPlant(_selectedVariety.PlantId);
-              
-                var notesResult = _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID).Result;
+               _selectedPlant=_plantManager.GetPlant(_selectedVariety.PlantId).Result;
+                 PlantName = _selectedPlant.Name;
+
+                 var notesResult = _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
         }
@@ -45,6 +47,17 @@ namespace WhenToDig83.ViewModels
             set
             {
                 _responseText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _plantName;
+        public string PlantName
+        {
+            get { return _plantName; }
+            set
+            {
+                _plantName = value;
                 OnPropertyChanged();
             }
         }
@@ -90,7 +103,7 @@ namespace WhenToDig83.ViewModels
             try
             {
                 MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "Plant");
-                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "EditVariety");
+                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "Variety");
             }
             catch (Exception exception)
             {

@@ -9,6 +9,7 @@
   </ContentPage.BindingContext>
 
  <StackLayout>
+   <Label Text="{Binding PlantName}" />
     <Entry Placeholder="Variety Name" Text="{Binding Name}"/>
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
