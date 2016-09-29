@@ -119,6 +119,7 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
+                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "EditPlant");
                 MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyChanged");
                 MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyUnchanged");
             }
