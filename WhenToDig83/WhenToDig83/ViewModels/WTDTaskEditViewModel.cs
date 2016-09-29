@@ -123,6 +123,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
+                    MessagingCenter.Send(this, "TaskUnchanged");
                     await _navigation.PopModalAsync();
                 });
             }
