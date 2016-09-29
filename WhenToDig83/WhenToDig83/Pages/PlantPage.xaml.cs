@@ -10,6 +10,7 @@ namespace WhenToDig83.Pages
         {
             InitializeComponent();
             ((BaseModel)BindingContext).Initialise(this);
+            
 
         }
     }

@@ -17,6 +17,7 @@ namespace WhenToDig83.ViewModels
 
             CurrentPage.Appearing += CurrentPageOnAppearing;
             CurrentPage.Disappearing += CurrentPageOnDisappearing;
+            NavigationPage.SetHasBackButton(page, false);
         }
 
         protected virtual void CurrentPageOnAppearing(object sender, EventArgs eventArgs) { }
