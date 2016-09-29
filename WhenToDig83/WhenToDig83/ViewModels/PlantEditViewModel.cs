@@ -86,7 +86,7 @@ namespace WhenToDig83.ViewModels
                 {
                     _selectedItem = value;
                     OnPropertyChanged();
-                    if(value == null) return;
+                    if (value == null) return;
 
                     _navigation.PushModalAsync(new VarietyEditPage());
                     MessagingCenter.Send(this, "EditVariety", value);
@@ -120,8 +120,8 @@ namespace WhenToDig83.ViewModels
             try
             {
                 MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "EditPlant");
-                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyChanged");
-                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyUnchanged");
+                MessagingCenter.Unsubscribe<VarietyEditViewModel>(this, "VarietyChanged");
+                MessagingCenter.Unsubscribe<VarietyEditViewModel>(this, "VarietyUnchanged");
             }
             catch (Exception exception)
             {

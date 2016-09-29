@@ -16,7 +16,7 @@
     </StackLayout>
        <ListView x:Name="VarietyListView"
               ItemsSource="{Binding Varieties}"
-              SelectedItem="{Binding SelectedItem}" >
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

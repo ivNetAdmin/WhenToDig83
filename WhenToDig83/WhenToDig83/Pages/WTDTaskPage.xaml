@@ -18,7 +18,7 @@
 
     <ListView x:Name="TaskListView"
               ItemsSource="{Binding WTDTasks}"
-              SelectedItem="{Binding SelectedItem}" >
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
