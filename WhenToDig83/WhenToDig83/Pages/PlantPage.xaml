@@ -19,7 +19,7 @@
 
     <ListView x:Name="PlantListView"
               ItemsSource="{Binding Plants}"
-              SelectedItem="{Binding SelectedItem}" >
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

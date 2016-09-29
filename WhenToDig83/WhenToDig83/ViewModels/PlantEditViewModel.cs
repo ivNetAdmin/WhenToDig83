@@ -83,6 +83,10 @@ namespace WhenToDig83.ViewModels
                     _selectedItem = value;
                     OnPropertyChanged();
 
+                    ContentPage contentPage = (ContentPage)AppHelper.CurrentPage();
+                    ListView listView = ((StackLayout)(contentPage).Content).FindByName<ListView>("VarietyListView");
+                    listView.SelectedItem = null;
+
                     _navigation.PushModalAsync(new VarietyEditPage());
                     MessagingCenter.Send(this, "EditVariety", value);
                 }
@@ -129,8 +133,8 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    MessagingCenter.Send(this, "Plant", _selectedPlant);
                     await _navigation.PushModalAsync(new VarietyEditPage());
+                    MessagingCenter.Send(this, "Plant", _selectedPlant);
                 });
             }
         }
@@ -140,8 +144,8 @@ namespace WhenToDig83.ViewModels
             get
             {
                 return new Command(async () =>
-                {
-                    await _navigation.PopModalAsync();
+                {                   
+                    await _navigation.PopModalAsync();                    
                 });
             }
         }

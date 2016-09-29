@@ -22,7 +22,7 @@ namespace WhenToDig83.ViewModels
             _plantManager = new PlantManager();
             _noteManager =  new NoteManager();
  
-            MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "EditVariety", (message, args) => {
+            MessagingCenter.Subscribe<PlantEditViewModel, Plant>(this, "Plant", (message, args) => {
                 _selectedPlant = args;             
             });
             

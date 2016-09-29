@@ -9,17 +9,18 @@ using WhenToDig83.Pages;
 using Xamarin.Forms;
 
 namespace WhenToDig83.ViewModels
-{    
+{
     internal class PlantViewModel : BaseModel
     {
         private INavigation _navigation;
         private PlantManager _plantManager;
-    
+
         public PlantViewModel()
         {
             _plantManager = new PlantManager();
 
-            MessagingCenter.Subscribe<PlantEditViewModel>(this, "PlantChanged", (message) => {
+            MessagingCenter.Subscribe<PlantEditViewModel>(this, "PlantChanged", (message) =>
+            {
                 GetPlants();
             });
         }
@@ -38,7 +39,7 @@ namespace WhenToDig83.ViewModels
                 }
             }
         }
-        
+
         private Plant _selectedItem;
         public Plant SelectedItem
         {
@@ -49,9 +50,13 @@ namespace WhenToDig83.ViewModels
                 {
                     _selectedItem = value;
                     OnPropertyChanged();
-                    
+
+                    ContentPage contentPage = (ContentPage)AppHelper.CurrentPage();
+                    ListView listView = ((StackLayout)(contentPage).Content).FindByName<ListView>("PlantListView");
+                    listView.SelectedItem = null;
+               
                     _navigation.PushModalAsync(new PlantEditPage());
-                     MessagingCenter.Send(this, "EditPlant", value);
+                    MessagingCenter.Send(this, "EditPlant", value);
                 }
             }
         }
@@ -69,8 +74,9 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                _navigation = AppHelper.CurrentPage().Navigation; 
-                GetPlants();  
+                _navigation = AppHelper.CurrentPage().Navigation;
+                GetPlants();
+
             }
             catch (Exception exception)
             {
@@ -82,7 +88,7 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "PlantChanged");
+                MessagingCenter.Unsubscribe<PlantEditViewModel>(this, "PlantChanged");              
             }
             catch (Exception exception)
             {
@@ -111,21 +117,21 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command<string>(async (string paramter) =>
                 {
-                    switch(paramter)
+                    switch (paramter)
                     {
                         case "task":
                             await _navigation.PushAsync(new WTDTaskPage());
-                            break;                        
+                            break;
                     }
-                   
+
                 });
             }
         }
         #endregion
-        
+
         #region Private
         private async void GetPlants()
-        {           
+        {
             var plants = await _plantManager.GetPlants();
             Plants = new ObservableCollection<Plant>(plants);
         }
