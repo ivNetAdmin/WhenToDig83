@@ -23,6 +23,9 @@ namespace WhenToDig83.ViewModels
             MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TaskChanged", (message) => {
                 GetTasks();
             });
+            MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TaskUnchanged", (message) => {
+                SelectedItem=null;
+            });
         }
 
         #region Properties
@@ -53,8 +56,7 @@ namespace WhenToDig83.ViewModels
 
                     if (value == null) return;
                     _navigation.PushModalAsync(new WTDTaskEditPage());
-                     MessagingCenter.Send(this, "EditTask", value);
-                    SelectedItem = null;
+                     MessagingCenter.Send(this, "EditTask", value);                   
                 }
             }
         }
