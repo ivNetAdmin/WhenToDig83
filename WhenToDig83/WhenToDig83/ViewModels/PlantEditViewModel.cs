@@ -21,7 +21,7 @@ namespace WhenToDig83.ViewModels
         public PlantEditViewModel()
         {
             _plantManager = new PlantManager();
-            _noteManager = new NoteManager();
+            _noteManager = new NoteManager();           
 
             MessagingCenter.Subscribe<PlantViewModel, Plant>(this, "EditPlant", (message, args) => {
                 _selectedPlant = args;
@@ -35,6 +35,10 @@ namespace WhenToDig83.ViewModels
             
             MessagingCenter.Subscribe<VarietyEditViewModel>(this, "VarietyChanged", (message) => {
                 GetVarieties();
+            });
+
+            MessagingCenter.Subscribe<VarietyEditViewModel>(this, "VarietyUnchanged", (message) => {
+                SelectedItem = null;
             });
         }
 
@@ -82,13 +86,11 @@ namespace WhenToDig83.ViewModels
                 {
                     _selectedItem = value;
                     OnPropertyChanged();
-
-                    ContentPage contentPage = (ContentPage)AppHelper.CurrentPage();
-                    ListView listView = ((StackLayout)(contentPage).Content).FindByName<ListView>("VarietyListView");
-                    listView.SelectedItem = null;
+                    if(value == null) return;
 
                     _navigation.PushModalAsync(new VarietyEditPage());
                     MessagingCenter.Send(this, "EditVariety", value);
+                   
                 }
             }
         }
@@ -117,7 +119,8 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "EditPlant");
+                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyChanged");
+                MessagingCenter.Unsubscribe<PlantViewModel, Plant>(this, "VarietyUnchanged");
             }
             catch (Exception exception)
             {
@@ -144,7 +147,8 @@ namespace WhenToDig83.ViewModels
             get
             {
                 return new Command(async () =>
-                {                   
+                {
+                    MessagingCenter.Send(this, "PlantUnchanged");
                     await _navigation.PopModalAsync();                    
                 });
             }

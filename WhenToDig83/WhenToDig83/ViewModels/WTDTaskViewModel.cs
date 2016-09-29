@@ -51,12 +51,10 @@ namespace WhenToDig83.ViewModels
                     _selectedItem = value;
                     OnPropertyChanged();
 
-                    ContentPage contentPage = (ContentPage)AppHelper.CurrentPage();
-                    ListView listView = ((StackLayout)(contentPage).Content).FindByName<ListView>("TaskListView");
-                    listView.SelectedItem = null;
-
+                    if (value == null) return;
                     _navigation.PushModalAsync(new WTDTaskEditPage());
                      MessagingCenter.Send(this, "EditTask", value);
+                    SelectedItem = null;
                 }
             }
         }

@@ -104,7 +104,8 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await _navigation.PopModalAsync();
+                    MessagingCenter.Send(this, "VarietyUnchanged");
+                    await _navigation.PopModalAsync();                  
                 });
             }
         }

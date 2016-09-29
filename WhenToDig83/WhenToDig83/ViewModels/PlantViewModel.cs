@@ -23,6 +23,11 @@ namespace WhenToDig83.ViewModels
             {
                 GetPlants();
             });
+
+            MessagingCenter.Subscribe<PlantEditViewModel>(this, "PlantUnchanged", (message) =>
+            {
+                SelectedItem = null;
+            });            
         }
 
         #region Properties
@@ -48,15 +53,13 @@ namespace WhenToDig83.ViewModels
             {
                 if (_selectedItem != value)
                 {
+
                     _selectedItem = value;
                     OnPropertyChanged();
 
-                    ContentPage contentPage = (ContentPage)AppHelper.CurrentPage();
-                    ListView listView = ((StackLayout)(contentPage).Content).FindByName<ListView>("PlantListView");
-                    listView.SelectedItem = null;
-               
+                    if (value == null) return;
                     _navigation.PushModalAsync(new PlantEditPage());
-                    MessagingCenter.Send(this, "EditPlant", value);
+                    MessagingCenter.Send(this, "EditPlant", value);                    
                 }
             }
         }
