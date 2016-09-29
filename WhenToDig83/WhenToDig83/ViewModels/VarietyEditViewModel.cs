@@ -30,6 +30,8 @@ namespace WhenToDig83.ViewModels
                 _selectedVariety = args;
                 Name = _selectedVariety.Name;
               
+               //_selectedPlant=_plantManager.GetPlant(_selectedVariety.PlantId);
+              
                 var notesResult = _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
