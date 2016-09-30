@@ -22,8 +22,7 @@ namespace WhenToDig83.ViewModels
         public WTDTaskViewModel()
         {
             _wtdTaskManager = new WTDTaskManager();
-            _currentCalendarDate = DateTime.Now;
-           DisplayCalendarDate = _currentCalendarDate.ToString("MMM yyyy");
+            _currentCalendarDate = DateTime.Now;           
 
             MessagingCenter.Subscribe<WTDTaskEditViewModel>(this, "TaskChanged", (message) => {
                 GetTasks();
@@ -156,6 +155,36 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
+        #region  Calendar Events
+        public ICommand CalendarChange
+        {
+            get
+            {
+                return new Command<string>((string paramter) =>
+                {
+                    switch (paramter)
+                    {
+                        case "NextMonth":
+                            _currentCalendarDate = _currentCalendarDate.AddMonths(1);
+                            break;
+                        case "NextYear":
+                            _currentCalendarDate = _currentCalendarDate.AddYears(1);
+                            break;
+                        case "LastMonth":
+                            _currentCalendarDate = _currentCalendarDate.AddMonths(-1);
+                            break;
+                        case "LastYear":
+                            _currentCalendarDate = _currentCalendarDate.AddYears(-1);
+                            break;
+                    }
+
+                    ShowCalendar();
+
+                });              
+            }
+        }
+        #endregion
+        
         #region Private
         private async void GetTasks()
         {
@@ -186,7 +215,9 @@ namespace WhenToDig83.ViewModels
             {
                 VerticalOptions = LayoutOptions.Fill
             };
-                        
+
+            DisplayCalendarDate = _currentCalendarDate.ToString("MMM yyyy");
+
             var month = _currentCalendarDate.ToString("MMM yyyy");
             var fill = new int[] { 6, 0, 1, 2, 3, 4, 5 };
 

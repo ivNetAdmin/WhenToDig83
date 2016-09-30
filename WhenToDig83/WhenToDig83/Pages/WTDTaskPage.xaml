@@ -21,12 +21,12 @@
         <Grid.RowDefinitions>
           <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Button Text="&lt;&lt;" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"/>
-        <Button Text="&lt;" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" />
+        <Button Text="&lt;&lt;" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" Command="{Binding CalendarChange}" CommandParameter="LastYear"/>
+        <Button Text="&lt;" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" Command="{Binding CalendarChange}" CommandParameter="LastMonth"/>
         <Label Text="{Binding DisplayCalendarDate}" Grid.Row="0" Grid.Column="2"
                Grid.ColumnSpan="3" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-        <Button Text="&gt;" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" />
-        <Button Text="&gt;&gt;" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"/>
+        <Button Text="&gt;" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center"  Command="{Binding CalendarChange}" CommandParameter="NextMonth"/>
+        <Button Text="&gt;&gt;" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center" Command="{Binding CalendarChange}" CommandParameter="NextYear"/>
       </Grid>
       
       <Grid>
