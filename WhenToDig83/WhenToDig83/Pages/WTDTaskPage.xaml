@@ -11,24 +11,57 @@
     <ToolbarItem Name="Task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
   </ContentPage.ToolbarItems>
-    
-    <StackLayout>
+
+  <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
+    <StackLayout.Children>
     
 <Label Text="{Binding ResponseText}" />
 
-    <ListView x:Name="TaskListView"
-              ItemsSource="{Binding WTDTasks}"
-              SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <Label Text="{Binding Name}" />
-          </ViewCell>          
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
+      <Grid VerticalOptions = "Start">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Button Text="&lt;&lt;" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"/>
+        <Button Text="&lt;" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" />
+        <Label Text="{Binding DisplayCalendarDate}" Grid.Row="0" Grid.Column="2"
+               Grid.ColumnSpan="3" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        <Button Text="&gt;" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" />
+        <Button Text="&gt;&gt;" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"/>
+      </Grid>
+      
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Text="Mo" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="Tu" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="We" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="Th" Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="Fr" Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="Sa" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" TextColor="Aqua"/>
+        <Label Text="Su" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"/>
+      </Grid>
+      <StackLayout x:Name="CalendarGridHolder" />
+<ScrollView Orientation="Vertical" VerticalOptions="Start">
+      <ListView x:Name="TaskListView"
+                ItemsSource="{Binding WTDTasks}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Label Text="{Binding Name}" />
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
 
-    <Button Command="{Binding New}"
+</ScrollView>
+     <StackLayout>
+      <Button Command="{Binding New}"
             Text="New Task" />
+   </StackLayout>
+    </StackLayout.Children>
   </StackLayout>
+  
+ 
 </ContentPage>
