@@ -13,7 +13,7 @@ using static Xamarin.Forms.Grid;
 
 namespace WhenToDig83.ViewModels
 {
-    class ReviewViewModel : BaseModel
+    internal class ReviewViewModel : BaseModel
     {
         private INavigation _navigation;
         private ReviewManager _reviewManager;      
