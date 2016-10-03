@@ -13,6 +13,7 @@ namespace WhenToDig83.Pages
         public ReviewPage()
         {
             InitializeComponent();
+            ((BaseModel)BindingContext).Initialise(this);      
         }
     }
 }
