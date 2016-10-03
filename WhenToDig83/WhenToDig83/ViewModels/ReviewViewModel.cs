@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,6 +50,28 @@ namespace WhenToDig83.ViewModels
             catch (Exception exception)
             {
                 ResponseText = exception.ToString();
+            }
+        }
+        #endregion
+
+        #region Navigation Events
+        public ICommand ToolbarNavigationCommand
+        {
+            get
+            {
+                return new Command<string>(async (string paramter) =>
+                {
+                    switch (paramter)
+                    {
+                        case "task":
+                            await _navigation.PushAsync(new WTDTaskPage());
+                            break;
+                        case "plant":
+                            await _navigation.PushAsync(new PlantPage());
+                            break;                        
+                    }
+
+                });
             }
         }
         #endregion

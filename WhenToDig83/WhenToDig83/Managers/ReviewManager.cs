@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using WhenToDig83.Core.Entities;
+using WhenToDig83.Data;
 
 namespace WhenToDig83.Managers
 {

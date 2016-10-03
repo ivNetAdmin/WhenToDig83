@@ -148,6 +148,9 @@ namespace WhenToDig83.ViewModels
                         case "plant":
                             await _navigation.PushAsync(new PlantPage());
                             break;
+                        case "review":
+                            await _navigation.PushAsync(new ReviewPage());
+                            break;
                     }
                    
                 });

@@ -126,6 +126,9 @@ namespace WhenToDig83.ViewModels
                         case "task":
                             await _navigation.PushAsync(new WTDTaskPage());
                             break;
+                        case "review":
+                            await _navigation.PushAsync(new ReviewPage());
+                            break;
                     }
 
                 });
