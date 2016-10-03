@@ -11,6 +11,7 @@
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
     <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
     <ToolbarItem Name="Plant"/>
+    <ToolbarItem Name="Review" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
   </ContentPage.ToolbarItems>
   
   <StackLayout>
