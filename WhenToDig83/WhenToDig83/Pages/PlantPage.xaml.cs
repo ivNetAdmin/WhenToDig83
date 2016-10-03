@@ -9,9 +9,7 @@ namespace WhenToDig83.Pages
         public PlantPage()
         {
             InitializeComponent();
-            ((BaseModel)BindingContext).Initialise(this);
-            
-
+            ((BaseModel)BindingContext).Initialise(this);           
         }
     }
 }
