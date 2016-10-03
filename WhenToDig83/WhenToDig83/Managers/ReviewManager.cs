@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhenToDig83.Managers
 {
-    class ReviewManager
+    public class ReviewManager
     {
     }
 }
