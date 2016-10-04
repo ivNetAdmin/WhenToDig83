@@ -16,6 +16,28 @@
   
    <StackLayout>    
       <Label Text="{Binding ResponseText}" />
+     <Entry Placeholder="Search..." Text="{Binding SearchTerm}"/>
+
+     <StackLayout Orientation="Horizontal">
+       <Button Text="Task" HorizontalOptions="FillAndExpand" Command="{Binding TaskSearch}"/>
+       <Button Text="Plant" HorizontalOptions="FillAndExpand" Command="{Binding PlantSearch}" />
+       <Button Text="Variety" HorizontalOptions="FillAndExpand" Command="{Binding VarietySearch}" />
+       <Button Text="*" HorizontalOptions="FillAndExpand" Command="{Binding AllSearch}" />
+     </StackLayout>
+
+     <ScrollView Orientation="Vertical" VerticalOptions="Start">
+       <ListView x:Name="NoteListView"
+                 ItemsSource="{Binding Notes}" >
+         <ListView.ItemTemplate>
+           <DataTemplate>
+             <ViewCell>
+               <Label Text="{Binding Notes}" />
+             </ViewCell>
+           </DataTemplate>
+         </ListView.ItemTemplate>
+       </ListView>
+
+     </ScrollView>
    </StackLayout>
   
 </ContentPage>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
+using WhenToDig83.Core.Enums;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using WhenToDig83.Pages;
@@ -37,8 +38,28 @@ namespace WhenToDig83.ViewModels
                 }
             }
         }
+        private string _searchTerm;
+        public string SearchTerm
+        {
+            get { return _searchTerm; }
+            set
+            {
+                if (_searchTerm != value)
+                {
+                    _searchTerm = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private ObservableCollection<Note> _notes;
+        public ObservableCollection<Note> Notes
+        {
+            get { return _notes; }
+            set { _notes = value; OnPropertyChanged(); }
+        }
         #endregion
-        
+
         #region Page Events
         protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
@@ -54,6 +75,52 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
+        #region Events
+        public ICommand TaskSearch
+        {
+            get
+            {
+                return new Command(async () =>
+                {                    
+                    var notes = await _reviewManager.Search(_searchTerm, (int)NoteType.Task);
+                    Notes = notes == null ? new ObservableCollection<Note>() : new ObservableCollection<Note>(notes);
+                });
+            }
+        }
+        public ICommand PlantSearch
+        {
+            get
+            {
+                return new Command(async () =>
+                {                  
+                    var notes = await _reviewManager.Search(_searchTerm, (int)NoteType.Plant);
+                    Notes = notes == null ? new ObservableCollection<Note>() : new ObservableCollection<Note>(notes);
+                });
+            }
+        }
+        public ICommand VarietySearch
+        {
+            get
+            {
+                return new Command(async () =>
+                {                    
+                    var notes = await _reviewManager.Search(_searchTerm, (int)NoteType.Variety);
+                    Notes = notes == null ? new ObservableCollection<Note>() : new ObservableCollection<Note>(notes);
+                });
+            }
+        }
+        public ICommand AllSearch
+        {
+            get
+            {
+                return new Command(async () =>
+                {                   
+                    var notes = await _reviewManager.Search(_searchTerm);
+                    Notes = notes == null ? new ObservableCollection<Note>() : new ObservableCollection<Note>(notes);
+                });
+            }
+        }
+        #endregion
         #region Navigation Events
         public ICommand ToolbarNavigationCommand
         {
