@@ -136,7 +136,10 @@ namespace WhenToDig83.ViewModels
                             break;
                         case "plant":
                             await _navigation.PushAsync(new PlantPage());
-                            break;                        
+                            break;    
+                        case "frost":
+                            await _navigation.PushAsync(new FrostPage());
+                            break;
                     }
 
                 });
