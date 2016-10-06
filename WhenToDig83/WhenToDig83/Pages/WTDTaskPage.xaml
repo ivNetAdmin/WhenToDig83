@@ -11,6 +11,7 @@
     <ToolbarItem Name="Task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
     <ToolbarItem Name="Review" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
+    <ToolbarItem Name="Frost" Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
   </ContentPage.ToolbarItems>
 
   <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
