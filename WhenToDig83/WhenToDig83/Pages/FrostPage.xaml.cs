@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WhenToDig83.ViewModels;
+using Xamarin.Forms;
 
 using Xamarin.Forms;
 
@@ -13,6 +10,7 @@ namespace WhenToDig83.Pages
         public FrostPage()
         {
             InitializeComponent();
+            ((BaseModel)BindingContext).Initialise(this);    
         }
     }
 }
