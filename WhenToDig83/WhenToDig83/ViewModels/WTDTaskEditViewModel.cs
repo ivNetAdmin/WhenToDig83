@@ -23,13 +23,13 @@ namespace WhenToDig83.ViewModels
 
             _wtdTaskManager = new WTDTaskManager();
             _noteManager = new NoteManager();
-            TaskTypes = GetTaskTypes();
+            TaskTypes = GetTaskTypes();           
 
             MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
                 _selectedTask = args;
                 Name = _selectedTask.Name;
                 Date = _selectedTask.Date;
-                Type = _selectedTask.Type;
+                Type = GetType(_selectedTask.Type);
 
                 var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
@@ -70,14 +70,14 @@ namespace WhenToDig83.ViewModels
             }
         }
         
-        private int _type;
-        public int Type
+        private string _type;
+        public string Type
         {
             get { return _type; }
             set
             {
-                var cakes = value;
-                _type = 1;
+                //var cakes = value;
+                _type = value;
                 OnPropertyChanged();
             }
         }
@@ -106,7 +106,8 @@ namespace WhenToDig83.ViewModels
             try
             {             
                 _navigation = AppHelper.CurrentPage().Navigation;
-               
+                Type = "Cultivate";
+
             }
             catch (Exception exception)
             {
@@ -145,12 +146,14 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _wtdTaskManager.AddTask(Name, Date, (int)WTDTaskType.Cultivate, Notes, _selectedTask == null ? 0 : _selectedTask.ID);                   
+                    var typeId = GetTypeId(_type);
+                    _wtdTaskManager.AddTask(Name, Date, typeId, Notes, _selectedTask == null ? 0 : _selectedTask.ID);                   
                     MessagingCenter.Send(this, "TaskChanged");
                     await _navigation.PopModalAsync();                    
                 });
             }
         }
+        
         #endregion
 
         #region Private
@@ -158,6 +161,34 @@ namespace WhenToDig83.ViewModels
         {
             var types = new List<string> { "Cultivate", "Plant","Other" };
             return new ObservableCollection<string>(types);
+        }
+
+        private int GetTypeId(string type)
+        {
+            switch(type)
+            {
+                case "Cultivate":
+                    return (int)WTDTaskType.Cultivate;
+                case "Plant":
+                    return (int)WTDTaskType.Plant;
+                default:
+                    return (int)WTDTaskType.Other;
+            }
+            
+        }
+
+        private string GetType(int typeId)
+        {
+            switch (typeId)
+            {
+                case (int)WTDTaskType.Cultivate:
+                    return "Cultivate";
+                case (int)WTDTaskType.Plant:
+                    return "Plant";
+                default:
+                    return "Other";
+            }
+
         }
         #endregion
     }

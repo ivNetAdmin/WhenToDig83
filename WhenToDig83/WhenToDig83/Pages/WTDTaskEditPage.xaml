@@ -15,9 +15,7 @@
     </DatePicker>
 
     <custom:BindablePicker          
-            ItemsSource="{Binding TaskTypes}"
-            HorizontalOptions="FillAndExpand"
-            HeightRequest="34"
+            ItemsSource="{Binding TaskTypes}"           
             SelectedItem="{Binding Type}" />
     
     <Label Text="Notes:" />
