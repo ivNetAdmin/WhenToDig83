@@ -151,6 +151,9 @@ namespace WhenToDig83.ViewModels
                         case "review":
                             await _navigation.PushAsync(new ReviewPage());
                             break;
+                        case "frost":
+                            await _navigation.PushAsync(new FrostPage());
+                            break;
                     }
                    
                 });
