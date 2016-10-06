@@ -12,6 +12,7 @@
     <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
     <ToolbarItem Name="Review"/>
+    <ToolbarItem Name="Frost" Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
   </ContentPage.ToolbarItems>
   
    <StackLayout>    
