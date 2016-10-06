@@ -25,7 +25,17 @@ namespace WhenToDig83.Managers
             {
                 var wtdTask = new WTDTask { Name = name, Date = date, Type = type };
                 await _wtdTaskRepository.Insert(wtdTask);
-                await _noteRepository.Insert(new Note { Type = (int)NoteType.Task, TypeId = wtdTask.ID, Notes = notes });
+                if (!string.IsNullOrEmpty(notes))
+                {
+                    await _noteRepository.Insert(
+                    new Note
+                    {
+                        Type = (int)NoteType.Task,
+                        TypeId = wtdTask.ID,
+                        Notes = notes,
+                        Meta = string.Format("{0}{1}{2}", (int)NoteType.Task, type, date.ToString("ddMMMyyyy"))
+                    });
+                }
             }
             else
             {
@@ -39,13 +49,24 @@ namespace WhenToDig83.Managers
 
                 if (note == null)
                 {
-                   await _noteRepository.Insert(new Note { Type = (int)NoteType.Task, TypeId = taskId, Notes = notes });
+                    if (!string.IsNullOrEmpty(notes))
+                    {
+                        await _noteRepository.Insert(
+                        new Note
+                        {
+                            Type = (int)NoteType.Task,
+                            TypeId = taskId,
+                            Notes = notes,
+                            Meta = string.Format("{0}{1}{2}", (int)NoteType.Task, type, date.ToString("ddMMMyyyy"))
+                        });
+                    }
                 }
                 else
                 {
                     note.Type = (int)NoteType.Task;
                     note.TypeId = taskId;
                     note.Notes = notes;
+                    note.Meta = string.Format("{0}{1}{2}", (int)NoteType.Task, type, date.ToString("ddMMMyyyy"));
                     await _noteRepository.Update(note);
                 }
             }

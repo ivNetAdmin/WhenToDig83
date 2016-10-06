@@ -37,7 +37,17 @@ namespace WhenToDig83.Managers
             {
                 var plant = new Plant { Name = name };
                 await _plantRepository.Insert(plant);
-                await _noteRepository.Insert(new Note { Type = (int)NoteType.Plant, TypeId = plant.ID, Notes = notes });
+                if (!string.IsNullOrEmpty(notes))
+                {
+                    await _noteRepository.Insert(
+                    new Note
+                    {
+                        Type = (int)NoteType.Plant,
+                        TypeId = plant.ID,
+                        Notes = notes,
+                        Meta = string.Format("{0}{1}", (int)NoteType.Plant, name)
+                    });
+                }
             }
             else
             {
@@ -49,13 +59,24 @@ namespace WhenToDig83.Managers
 
                 if (note == null)
                 {
-                    await _noteRepository.Insert(new Note { Type = (int)NoteType.Plant, TypeId = plantId, Notes = notes });
+                    if (!string.IsNullOrEmpty(notes))
+                    {
+                        await _noteRepository.Insert(
+                        new Note
+                        {
+                            Type = (int)NoteType.Plant,
+                            TypeId = plantId,
+                            Notes = notes,
+                            Meta = string.Format("{0}{1}", (int)NoteType.Plant, name)
+                        });
+                    }
                 }
                 else
                 {
                     note.Type = (int)NoteType.Plant;
                     note.TypeId = plantId;
                     note.Notes = notes;
+                    note.Meta = string.Format("{0}{1}", (int)NoteType.Plant, name);
                     await _noteRepository.Update(note);
                 }
             }
@@ -66,13 +87,23 @@ namespace WhenToDig83.Managers
             return await _plantRepository.Get(plantId);
         }
 
-        internal async void AddVariety(string name, string notes, int plantId, int varietyId)
+        internal async void AddVariety(string name, string notes, int plantId, string plantName, int varietyId)
         {
             if (varietyId == 0)
             {
                 var variety = new Variety { Name = name, PlantId = plantId };
                 await _varietyRepository.Insert(variety);
-                await _noteRepository.Insert(new Note { Type = (int)NoteType.Variety, TypeId = variety.ID, Notes = notes });
+                if (!string.IsNullOrEmpty(notes))
+                {
+                    await _noteRepository.Insert(
+                        new Note
+                        {
+                            Type = (int)NoteType.Variety,
+                            TypeId = variety.ID,
+                            Notes = notes,
+                            Meta = string.Format("{0}{1} [{2}]", (int)NoteType.Variety, plantName, name)
+                        });
+                }
             }
             else
             {
@@ -84,13 +115,24 @@ namespace WhenToDig83.Managers
 
                 if (note == null)
                 {
-                    await _noteRepository.Insert(new Note { Type = (int)NoteType.Variety, TypeId = varietyId, Notes = notes });
+                    if (!string.IsNullOrEmpty(notes))
+                    {
+                        await _noteRepository.Insert(
+                        new Note
+                        {
+                            Type = (int)NoteType.Variety,
+                            TypeId = varietyId,
+                            Notes = notes,
+                            Meta = string.Format("{0}{1} [{2}]", (int)NoteType.Variety, plantName, name)
+                        });
+                    }
                 }
                 else
                 {
                     note.Type = (int)NoteType.Variety;
                     note.TypeId = varietyId;
                     note.Notes = notes;
+                    note.Meta = string.Format("{0}{1} [{2}]", (int)NoteType.Variety, plantName, name);
                     await _noteRepository.Update(note);
                 }
             }

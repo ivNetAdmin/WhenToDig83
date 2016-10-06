@@ -31,7 +31,10 @@
          <ListView.ItemTemplate>
            <DataTemplate>
              <ViewCell>
+               <StackLayout Orientation="Horizontal">
+               <Label Text="{Binding Meta}" />
                <Label Text="{Binding Notes}" />
+                 </StackLayout>
              </ViewCell>
            </DataTemplate>
          </ListView.ItemTemplate>

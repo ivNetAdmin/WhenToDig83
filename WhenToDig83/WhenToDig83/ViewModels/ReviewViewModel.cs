@@ -21,7 +21,8 @@ namespace WhenToDig83.ViewModels
         
         public ReviewViewModel()
         {
-            _reviewManager = new ReviewManager();          
+            _reviewManager = new ReviewManager();
+            SearchTerm = string.Empty;
         }
         
         #region Properties

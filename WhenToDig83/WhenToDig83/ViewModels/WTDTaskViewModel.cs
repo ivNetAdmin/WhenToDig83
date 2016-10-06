@@ -182,7 +182,7 @@ namespace WhenToDig83.ViewModels
                     }
 
                     ShowCalendar();
-
+                    GetTasks();
                 });              
             }
         }
@@ -193,7 +193,7 @@ namespace WhenToDig83.ViewModels
         {
             // _wtdTaskManager.AddTask("zozo", DateTime.Now, "");
 
-            var tasks = await _wtdTaskManager.GetTasksByMonth(DateTime.Now.Month, DateTime.Now.Year);
+            var tasks = await _wtdTaskManager.GetTasksByMonth(_currentCalendarDate.Month, _currentCalendarDate.Year);
             WTDTasks = new ObservableCollection<WTDTask>(tasks);
         }
 

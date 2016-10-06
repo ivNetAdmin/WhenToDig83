@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
-             x:Class="WhenToDig83.Pages.WTDTaskEditPage">
+             x:Class="WhenToDig83.Pages.WTDTaskEditPage"
+             xmlns:custom="clr-namespace:WhenToDig83.Controls;assembly=WhenToDig83">
   <ContentPage.BindingContext>
     <models:WTDTaskEditViewModel />
   </ContentPage.BindingContext>
@@ -12,6 +13,13 @@
     <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Date}">
          <DatePicker.Format>ddMMMyyyy</DatePicker.Format>
     </DatePicker>
+
+    <custom:BindablePicker          
+            ItemsSource="{Binding TaskTypes}"
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="34"
+            SelectedItem="{Binding Type}" />
+    
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
     <StackLayout Orientation="Horizontal">

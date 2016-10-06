@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Core.Enums;
@@ -21,6 +23,7 @@ namespace WhenToDig83.ViewModels
 
             _wtdTaskManager = new WTDTaskManager();
             _noteManager = new NoteManager();
+            TaskTypes = GetTaskTypes();
 
             MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
                 _selectedTask = args;
@@ -32,7 +35,7 @@ namespace WhenToDig83.ViewModels
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
             });
         }
-
+        
         #region Properties
         private string _responseText;
         public string ResponseText
@@ -73,7 +76,8 @@ namespace WhenToDig83.ViewModels
             get { return _type; }
             set
             {
-                _type = value;
+                var cakes = value;
+                _type = 1;
                 OnPropertyChanged();
             }
         }
@@ -88,10 +92,16 @@ namespace WhenToDig83.ViewModels
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<string> _taskTypes;
+        public ObservableCollection<string> TaskTypes
+        {
+            get { return _taskTypes; }
+            set { _taskTypes = value; OnPropertyChanged(); }
+        }
         #endregion
-        
+
         #region Page Events
-         protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
+        protected override void CurrentPageOnAppearing(object sender, EventArgs eventArgs)
         {
             try
             {             
@@ -140,6 +150,14 @@ namespace WhenToDig83.ViewModels
                     await _navigation.PopModalAsync();                    
                 });
             }
+        }
+        #endregion
+
+        #region Private
+        private ObservableCollection<string> GetTaskTypes()
+        {
+            var types = new List<string> { "Cultivate", "Plant","Other" };
+            return new ObservableCollection<string>(types);
         }
         #endregion
     }

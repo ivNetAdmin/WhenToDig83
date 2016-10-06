@@ -132,7 +132,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _plantManager.AddVariety(Name, Notes, _selectedPlant.ID, _selectedVariety == null ? 0 : _selectedVariety.ID);
+                    _plantManager.AddVariety(Name, Notes, _selectedPlant.ID, _selectedPlant.Name, _selectedVariety == null ? 0 : _selectedVariety.ID);
                     MessagingCenter.Send(this, "VarietyChanged");
                     await _navigation.PopModalAsync();
                 });
