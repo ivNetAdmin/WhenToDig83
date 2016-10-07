@@ -25,16 +25,15 @@ namespace WhenToDig83.Managers
             //    await _frostRepository.Insert(frost);
 
             Random rnd = new Random();
-            for(int i=0;i<50;i++)
-            {  
-               var frost = new Frost
-                {
-                    Year = rnd.Next(2010,2016),
-                    Month = rnd.Next(1, 12),
-                    Day = rnd.Next(1, 28)
-                };
-                await _frostRepository.Insert(frost);
-            }
+             
+           var frost = new Frost
+            {
+                Year = rnd.Next(2010,2016),
+                Month = rnd.Next(1, 12),
+                Day = rnd.Next(1, 28)
+            };
+            await _frostRepository.Insert(frost);
+
              
         }
 
