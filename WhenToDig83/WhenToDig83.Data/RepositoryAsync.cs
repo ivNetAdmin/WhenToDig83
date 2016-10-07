@@ -100,7 +100,7 @@ namespace WhenToDig83.Data
         {
             using (await Mutex.LockAsync().ConfigureAwait(false))
             {
-               // await _connection.DeleteAllAsync<T>().ConfigureAwait(false);
+                await _connection.DeleteAllAsync<T>().ConfigureAwait(false);
                 await _connection.CreateTableAsync<T>().ConfigureAwait(false);
             }
         }

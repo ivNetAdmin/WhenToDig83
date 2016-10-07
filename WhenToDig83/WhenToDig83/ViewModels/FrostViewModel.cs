@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Input;
-using WhenToDig83.Core.Entities;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using WhenToDig83.Pages;
 using Xamarin.Forms;
+using WhenToDig83.Core.Entities;
+using System.Collections.ObjectModel;
 
 namespace WhenToDig83.ViewModels
 {
@@ -35,6 +33,35 @@ namespace WhenToDig83.ViewModels
                 }
             }
         }
+
+        private ObservableCollection<Frost> _lastFrostDates;
+        public ObservableCollection<Frost> LastFrostDates
+        {
+            get { return _lastFrostDates; }
+            set { _lastFrostDates = value; OnPropertyChanged(); }
+        }
+
+        private System.Collections.ObjectModel.ObservableCollection<Frost> _nextFrostDates;
+        public ObservableCollection<Frost> NextFrostDates
+        {
+            get { return _nextFrostDates; }
+            set { _nextFrostDates = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
+        #region Events
+        public ICommand New
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    _frostManager.Add();
+                    GetFrostDates();
+                });
+            }
+        }
         #endregion
 
         #region Page Events
@@ -42,7 +69,8 @@ namespace WhenToDig83.ViewModels
         {
             try
             {
-                _navigation = AppHelper.CurrentPage().Navigation;              
+                _navigation = AppHelper.CurrentPage().Navigation;
+                GetFrostDates();             
             }
             catch (Exception exception)
             {
@@ -73,6 +101,18 @@ namespace WhenToDig83.ViewModels
                    
                 });
             }
+        }
+        #endregion
+
+        #region Private
+        private async void GetFrostDates()
+        {
+            var dates = await _frostManager.GetDates();
+
+            LastFrostDates = new ObservableCollection<Frost>(dates);
+
+            
+            NextFrostDates = new ObservableCollection<Frost>(dates);
         }
         #endregion
     }

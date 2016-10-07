@@ -20,7 +20,7 @@ namespace WhenToDig83.Managers
             if(noteType==0)
                 return await _noteRepository.Get(predicate: x => x.Notes.Contains(searchTerm), orderBy: x => x.Type);
 
-            return  await _noteRepository.Get(predicate: x => x.Type == noteType && x.Notes.Contains(searchTerm), orderBy: x => x.Type);           
+            return await _noteRepository.Get(predicate: x => x.Type == noteType && x.Notes.Contains(searchTerm), orderBy: x => x.Type);           
         }
     }
 }

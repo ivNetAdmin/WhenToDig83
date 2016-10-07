@@ -5,14 +5,45 @@
              x:Class="WhenToDig83.Pages.FrostPage">
  
   <ContentPage.BindingContext>
-    <models:ReviewViewModel />
+    <models:FrostViewModel />
   </ContentPage.BindingContext>
   
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
     <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
-    <ToolbarItem Name="Review"/>
-    <ToolbarItem Name="Frost" Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
+    <ToolbarItem Name="Review" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
+    <ToolbarItem Name="Frost" />
   </ContentPage.ToolbarItems>
-  
+
+  <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
+    <StackLayout.Children>
+      
+        <Button Command="{Binding New}"
+              Text="Frost Today?" />
+
+      <Label Text="Last"/>
+      <ListView x:Name="LastFrostListView"
+               ItemsSource="{Binding LastFrostDates}" >
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Label Text="{Binding DisplayDate}" />
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+      <Label Text="Next"/>
+      <ListView x:Name="NextFrostListView"
+              ItemsSource="{Binding NextFrostDates}" >
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Label Text="{Binding DisplayDate}" />
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout.Children>
+  </StackLayout>
 </ContentPage>
