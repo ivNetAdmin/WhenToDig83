@@ -31,8 +31,10 @@
         </ListView.ItemTemplate>
       </ListView>
           </StackLayout>
+        <StackLayout Orientation="Vertical">
 <Button Command="{Binding New}"
               Text="Frost Today?" />
+</StackLayout>          
         <StackLayout Orientation="Vertical">
       <Label Text="Next"/>
       <ListView x:Name="NextFrostDatesListView"
