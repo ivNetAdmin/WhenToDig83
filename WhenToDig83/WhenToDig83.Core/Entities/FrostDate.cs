@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WhenToDig83.Core.Entities
 {
-    class FrostDate
-    {
+    public class FrostDate : DbKey
+    {   
+        public DateTime Date { get; set; }  
     }
 }
