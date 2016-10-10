@@ -38,6 +38,7 @@
     <Compile Include="Contracts\IEntity.cs" />
     <Compile Include="Entities\DbKey.cs" />
     <Compile Include="Entities\Frost.cs" />
+    <Compile Include="Entities\FrostDate.cs" />
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\Plant.cs" />
     <Compile Include="Entities\Variety.cs" />
