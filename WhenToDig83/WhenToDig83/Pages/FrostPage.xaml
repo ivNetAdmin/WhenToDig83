@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
              x:Class="WhenToDig83.Pages.FrostPage">
- 
+
   <ContentPage.BindingContext>
     <models:FrostViewModel />
   </ContentPage.BindingContext>
-  
+
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
     <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
@@ -19,38 +19,38 @@
     <StackLayout.Children>
       <StackLayout Orientation="Horizontal">
         <StackLayout Orientation="Vertical">
-        <Label Text="Last"/>
-      <ListView x:Name="LastFrostDatesListView"
-                 ItemsSource="{Binding LastFrostDates}" >
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Date}" /> [<Label Text="{Binding Count}" />]
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-          </StackLayout>
+          <Label Text="Last"/>
+          <ListView x:Name="LastFrostDatesListView"
+                     ItemsSource="{Binding LastFrostDates}" >
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Date}" /> [<Label Text="{Binding Count}" />]
+                  </StackLayout>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
-<Button Command="{Binding New}"
-              Text="Frost Today?" />
-</StackLayout>          
+          <Button Command="{Binding New}"
+                        Text="Frost Today?" />
+        </StackLayout>
         <StackLayout Orientation="Vertical">
-      <Label Text="Next"/>
-      <ListView x:Name="NextFrostDatesListView"
-                 ItemsSource="{Binding NextFrostDates}" >
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <Label Text="{Binding Date}" />
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-          </StackLayout>
-      </StackLayout>       
+          <Label Text="Next"/>
+          <ListView x:Name="NextFrostDatesListView"
+                     ItemsSource="{Binding NextFrostDates}" >
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Label Text="{Binding Date}" />
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
+      </StackLayout>
     </StackLayout.Children>
   </StackLayout>
 </ContentPage>

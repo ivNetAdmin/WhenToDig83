@@ -32,25 +32,27 @@ namespace WhenToDig83.Managers
             var day = rnd.Next(1, 28);
             var month = rnd.Next(1, 12);
             var year = rnd.Next(2010, 2016);
-            
-            var frost = _frostRepository.Get(predicate: x => x.Month == month && x.Day == day);
-            
-            if(frost==null)
-            {            
-                var frost = new Frost
-                {               
+
+            var frost = await _frostRepository.Get(predicate: x => x.Month == month && x.Day == day);
+
+            if (frost == null)
+            {
+                frost = new Frost
+                {
                     Month = month,
                     Day = day,
                     Date = string.Format("{0}{1}", day.ToString("00"), DateHelper.MonthAbbreviation(month)),
                     Count = 1
                 };
                 await _frostRepository.Insert(frost);
-            }else{
+            }
+            else
+            {
                 frost.Count = frost.Count + 1;
                 await _frostRepository.Update(frost);
             }
-            
-            await _frostDateRepository.Insert(new FrostDate{Date = new DateTime(year,month,day)});             
+
+            await _frostDateRepository.Insert(new FrostDate { Date = new DateTime(year, month, day) });
         }
 
         internal async Task<List<Frost>> GetLastDates()
