@@ -11,10 +11,12 @@ namespace WhenToDig83.Managers
     public class FrostManager
     {
         private RepositoryAsync<Frost> _frostRepository;
+        private RepositoryAsync<FrostDate> _frostDateRepository;
 
         public FrostManager()
         {
             _frostRepository = new RepositoryAsync<Frost>();
+            _frostDateRepository = new RepositoryAsync<FrostDate>();
         }
 
         internal async void Add()
@@ -29,16 +31,26 @@ namespace WhenToDig83.Managers
 
             var day = rnd.Next(1, 28);
             var month = rnd.Next(1, 12);
-            var frost = new Frost
-            {
-                Year = rnd.Next(2010, 2016),
-                Month = month,
-                Day = day,
-                Date = string.Format("{0}{1}", day.ToString("00"), DateHelper.MonthAbbreviation(month))
-            };
-            await _frostRepository.Insert(frost);
-
-             
+            var year = rnd.Next(2010, 2016);
+            
+            var frost = _frostRepository.Get(predicate: x => x.Month == month && x.Day == day);
+            
+            if(frost==null)
+            {            
+                var frost = new Frost
+                {               
+                    Month = month,
+                    Day = day,
+                    Date = string.Format("{0}{1}", day.ToString("00"), DateHelper.MonthAbbreviation(month)),
+                    Count = 1
+                };
+                await _frostRepository.Insert(frost);
+            }else{
+                frost.Count = frost.Count + 1;
+                await _frostRepository.Update(frost);
+            }
+            
+            await _frostDateRepository.Insert(new FrostDate{Date = new DateTime(year,month,day)});             
         }
 
         internal async Task<List<Frost>> GetLastDates()
