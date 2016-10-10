@@ -25,7 +25,9 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Label Text="{Binding Date}" />
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Date}" /> [<Label Text="{Binding Count}" />]
+              </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
