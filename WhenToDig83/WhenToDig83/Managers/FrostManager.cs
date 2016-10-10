@@ -4,6 +4,7 @@ using WhenToDig83.Core.Entities;
 using WhenToDig83.Data;
 using WhenToDig83.Helpers;
 using System.Collections.Generic;
+using WhenToDig83.Core.Helpers;
 
 namespace WhenToDig83.Managers
 {
@@ -25,12 +26,15 @@ namespace WhenToDig83.Managers
             //    await _frostRepository.Insert(frost);
 
             Random rnd = new Random();
-             
-           var frost = new Frost
+
+            var day = rnd.Next(1, 28);
+            var month = rnd.Next(1, 12);
+            var frost = new Frost
             {
-                Year = rnd.Next(2010,2016),
-                Month = rnd.Next(1, 12),
-                Day = rnd.Next(1, 28)
+                Year = rnd.Next(2010, 2016),
+                Month = month,
+                Day = day,
+                Date = string.Format("{0}{1}", day.ToString("00"), DateHelper.MonthAbbreviation(month))
             };
             await _frostRepository.Insert(frost);
 
