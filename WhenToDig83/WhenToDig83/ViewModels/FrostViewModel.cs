@@ -13,7 +13,7 @@ namespace WhenToDig83.ViewModels
     {
         private INavigation _navigation;
         private FrostManager _frostManager;
-        
+
         public FrostViewModel()
         {
             _frostManager = new FrostManager();
@@ -108,11 +108,26 @@ namespace WhenToDig83.ViewModels
         #region Private
         private async void GetFrostDates()
         {
+            var allDates = await _frostManager.GetAllDates();
+            var allDateCount = allDates.Count;
+            if (allDateCount == 0) allDateCount = 1;
+
             var dates = await _frostManager.GetLastDates();
+            SetChancePercent(dates, allDateCount);            
             LastFrostDates = new ObservableCollection<Frost>(dates);
 
             dates = await _frostManager.GetNextDates();
+            SetChancePercent(dates, allDateCount);
             NextFrostDates = new ObservableCollection<Frost>(dates);
+        }
+
+        private void SetChancePercent(System.Collections.Generic.List<Frost> dates, int allDateCount)
+        {
+            foreach (var date in dates)
+            {
+                var count = ((Frost)date).Count;
+                ((Frost)date).Count = (count / allDateCount) * 100;
+            }
         }
         #endregion
     }

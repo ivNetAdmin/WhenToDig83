@@ -55,14 +55,19 @@ namespace WhenToDig83.Managers
             await _frostDateRepository.Insert(new FrostDate { Date = new DateTime(year, month, day) });
         }
 
+        internal async Task<List<FrostDate>> GetAllDates()
+        {
+            return await _frostDateRepository.Get();
+        }
+
         internal async Task<List<Frost>> GetLastDates()
         {
-            return await _frostRepository.Get(predicate: x => x.Month <= DateTime.Now.Month, sortOrder: "desc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
+            return await _frostRepository.Get(predicate: x => x.Month <= DateTime.Now.Month && x.Day <= DateTime.Now.Day, sortOrder: "desc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
         }
 
         internal async Task<List<Frost>> GetNextDates()
         {
-            return await _frostRepository.Get(predicate: x => x.Month >= DateTime.Now.Month, sortOrder: "asc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
+            return await _frostRepository.Get(predicate: x => x.Month >= DateTime.Now.Month && x.Day >= DateTime.Now.Day, sortOrder: "asc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
         }
     }
 }

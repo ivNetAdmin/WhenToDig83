@@ -9,6 +9,6 @@ namespace WhenToDig83.Core.Entities
         public int Day { get; set; }
         public int Month { get; set; }        
         public string Date { get; set; }  
-        public int Count { get; set; }
+        public decimal Count { get; set; }
     }
 }
