@@ -76,7 +76,7 @@ namespace WhenToDig83.Managers
         {
             var startDate = new DateTime(year, month, 1);
             var endDate = new DateTime(year, month + 1, 1);
-            return await _wtdTaskRepository.Get(predicate: x => x.Date >= startDate && x.Date < endDate, orderBy: x => x.Date);
+            return await _wtdTaskRepository.Get(predicate: x => x.Date >= startDate && x.Date < endDate, sortOrder: "asc", orderBy: x => x.Date);
         }
 
         public List<WTDTask> GetTasks()

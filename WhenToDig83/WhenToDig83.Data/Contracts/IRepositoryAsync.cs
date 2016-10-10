@@ -11,7 +11,7 @@ namespace WhenToDig83.Data.Contracts
     {
         Task<List<T>> Get();
         Task<T> Get(int id);
-        Task<List<T>> Get<TValue>(Expression<Func<T, bool>> predicate = null, Expression<Func<T, TValue>> orderBy = null);
+        Task<List<T>> Get<TValue>(Expression<Func<T, bool>> predicate = null, string sortOrder = null, Expression<Func<T, TValue>> orderBy = null, Expression<Func<T, TValue>> thenBy = null, int? take = null);
         Task<T> Get(Expression<Func<T, bool>> predicate);
         AsyncTableQuery<T> AsQueryable();
         Task<int> Insert(T entity);

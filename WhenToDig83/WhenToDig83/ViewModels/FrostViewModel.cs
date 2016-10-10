@@ -108,11 +108,11 @@ namespace WhenToDig83.ViewModels
         #region Private
         private async void GetFrostDates()
         {
-            var dates = await _frostManager.GetDates();
-
+            var dates = await _frostManager.GetLastDates();
             LastFrostDates = new ObservableCollection<Frost>(dates);
 
-           // NextFrostDates = new ObservableCollection<Frost>(dates);
+            dates = await _frostManager.GetNextDates();
+            NextFrostDates = new ObservableCollection<Frost>(dates);
         }
         #endregion
     }

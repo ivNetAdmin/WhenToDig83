@@ -33,17 +33,17 @@
         </ListView.ItemTemplate>
       </ListView>
 
-      <!--<Label Text="Next"/>
-      <ListView x:Name="NextFrostListView"
-              ItemsSource="{Binding NextFrostDates}" >
+      <Label Text="Next"/>
+      <ListView x:Name="NextFrostDatesListView"
+                 ItemsSource="{Binding NextFrostDates}" >
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Label Text="{Binding DisplayDate}" />
+              <Label Text="{Binding Date}" />
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
-      </ListView>-->
+      </ListView>
     </StackLayout.Children>
   </StackLayout>
 </ContentPage>

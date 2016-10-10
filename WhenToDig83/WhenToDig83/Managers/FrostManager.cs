@@ -41,9 +41,14 @@ namespace WhenToDig83.Managers
              
         }
 
-        internal async Task<List<Frost>> GetDates()
-        {    
-            return await _frostRepository.Get(predicate: x => x.Month >0, orderBy: x => x.Month);
+        internal async Task<List<Frost>> GetLastDates()
+        {
+            return await _frostRepository.Get(predicate: x => x.Month <= DateTime.Now.Month, sortOrder: "desc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
+        }
+
+        internal async Task<List<Frost>> GetNextDates()
+        {
+            return await _frostRepository.Get(predicate: x => x.Month >= DateTime.Now.Month, sortOrder: "asc", orderBy: x => x.Month, thenBy: x => x.Day, take: 6);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace WhenToDig83.Managers
 
         public async Task<List<Variety>> GetVarieties(int plantId)
         {
-            return await _varietyRepository.Get(predicate: x => x.PlantId == plantId, orderBy: x => x.Name);
+            return await _varietyRepository.Get(predicate: x => x.PlantId == plantId, sortOrder: "asc", orderBy: x => x.Name);
         }
 
         internal async void AddPlant(string name, string notes, int plantId)

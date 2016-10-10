@@ -60,7 +60,12 @@ namespace WhenToDig83.Data
             }
         }
 
-        public async Task<List<T>> Get<TValue>(Expression<Func<T, bool>> predicate = null, Expression<Func<T, TValue>> orderBy = null)
+        public async Task<List<T>> Get<TValue>(
+            Expression<Func<T, bool>> predicate = null,
+            string sortOrder = null,
+            Expression<Func<T, TValue>> orderBy = null, 
+            Expression<Func<T, TValue>> thenBy = null,
+            int? take = null)
         {
             var query = _connection.Table<T>();
 
@@ -68,10 +73,29 @@ namespace WhenToDig83.Data
             {
                 query = query.Where(predicate);
             }
-            if (orderBy != null)
+            if (sortOrder == "asc")
             {
-                query = query.OrderBy<TValue>(orderBy);
+                if (orderBy != null)
+                {
+                    if (thenBy != null)
+                    {
+                        query = query.OrderBy<TValue>(orderBy).ThenBy<TValue>(thenBy);
+                    }
+                    query = query.OrderBy<TValue>(orderBy);
+                }
+            }else if (sortOrder == "desc")
+            {
+                if (orderBy != null)
+                {
+                    if (thenBy != null)
+                    {
+                        query = query.OrderByDescending<TValue>(orderBy).ThenByDescending<TValue>(thenBy);
+                    }
+                    query = query.OrderByDescending<TValue>(orderBy);
+                }
             }
+
+            if (take != null) query = query.Take(take.GetValueOrDefault());
 
             return await query.ToListAsync().ConfigureAwait(false);
         }
