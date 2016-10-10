@@ -39,8 +39,7 @@ namespace WhenToDig83.Managers
 
         internal async Task<List<Frost>> GetDates()
         {
-            var d = await _frostRepository.Get();
-            return d;
+           return await _frostRepository.Get();
         }
     }
 }

@@ -22,18 +22,20 @@
               Text="Frost Today?" />
 
       <Label Text="Last"/>
-      <ListView x:Name="LastFrostListView"
-               ItemsSource="{Binding LastFrostDates}" >
+      <ListView x:Name="LastFrostDatesListView"
+                 ItemsSource="{Binding LastFrostDates}" >
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Label Text="{Binding DisplayDate}" />
+              <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding Day}" /> <Label Text="{Binding Month}" />
+              </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
 
-      <Label Text="Next"/>
+      <!--<Label Text="Next"/>
       <ListView x:Name="NextFrostListView"
               ItemsSource="{Binding NextFrostDates}" >
         <ListView.ItemTemplate>
@@ -43,7 +45,7 @@
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
-      </ListView>
+      </ListView>-->
     </StackLayout.Children>
   </StackLayout>
 </ContentPage>

@@ -10,9 +10,9 @@ namespace WhenToDig83.Core.Entities
         public int Month { get; set; }
         public int Year { get; set; }
 
-        [Ignore]
-        public string DisplayDate { get {
-                return string.Format("{0) {1}", Day, DateHelper.MonthAbbreviation(Month));
-            } }
+        //[Ignore]
+        //public string DisplayDate { get {
+        //        return string.Format("{0) {1}", Day, DateHelper.MonthAbbreviation(Month));
+        //    } }
     }
 }

@@ -41,7 +41,7 @@ namespace WhenToDig83.ViewModels
             set { _lastFrostDates = value; OnPropertyChanged(); }
         }
 
-        private System.Collections.ObjectModel.ObservableCollection<Frost> _nextFrostDates;
+        private ObservableCollection<Frost> _nextFrostDates;
         public ObservableCollection<Frost> NextFrostDates
         {
             get { return _nextFrostDates; }
@@ -104,6 +104,7 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
+    
         #region Private
         private async void GetFrostDates()
         {
@@ -111,8 +112,7 @@ namespace WhenToDig83.ViewModels
 
             LastFrostDates = new ObservableCollection<Frost>(dates);
 
-            
-            NextFrostDates = new ObservableCollection<Frost>(dates);
+           // NextFrostDates = new ObservableCollection<Frost>(dates);
         }
         #endregion
     }
