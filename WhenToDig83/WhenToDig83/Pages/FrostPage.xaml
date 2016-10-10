@@ -18,6 +18,7 @@
   <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
     <StackLayout.Children>
       <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Vertical">
         <Label Text="Last"/>
       <ListView x:Name="LastFrostDatesListView"
                  ItemsSource="{Binding LastFrostDates}" >
@@ -29,8 +30,10 @@
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
+          </StackLayout>
 <Button Command="{Binding New}"
               Text="Frost Today?" />
+        <StackLayout Orientation="Vertical">
       <Label Text="Next"/>
       <ListView x:Name="NextFrostDatesListView"
                  ItemsSource="{Binding NextFrostDates}" >
@@ -42,10 +45,8 @@
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
-      </StackLayout>
-        
-
-      
+          </StackLayout>
+      </StackLayout>       
     </StackLayout.Children>
   </StackLayout>
 </ContentPage>
