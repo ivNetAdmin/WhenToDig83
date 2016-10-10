@@ -6,7 +6,7 @@
   <ContentPage.BindingContext>
     <models:WTDTaskViewModel />
   </ContentPage.BindingContext>
-  
+
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
     <ToolbarItem Name="Task"/>
     <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
@@ -16,8 +16,8 @@
 
   <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
     <StackLayout.Children>
-    
-<Label Text="{Binding ResponseText}" />
+
+      <Label Text="{Binding ResponseText}" />
 
       <Grid VerticalOptions = "Start">
         <Grid.RowDefinitions>
@@ -30,7 +30,7 @@
         <Button Text="&gt;" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center"  Command="{Binding CalendarChange}" CommandParameter="NextMonth"/>
         <Button Text="&gt;&gt;" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center" Command="{Binding CalendarChange}" CommandParameter="NextYear"/>
       </Grid>
-      
+
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
@@ -44,26 +44,29 @@
         <Label Text="Su" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"/>
       </Grid>
       <StackLayout x:Name="CalendarGridHolder" />
-<ScrollView Orientation="Vertical" VerticalOptions="Start">
-      <ListView x:Name="TaskListView"
-                ItemsSource="{Binding WTDTasks}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <Label Text="{Binding Name}" />
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+      <ScrollView Orientation="Vertical" VerticalOptions="Start">
+        <ListView x:Name="TaskListView"
+                  ItemsSource="{Binding WTDTasks}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <StackLayout Orientation="Horizontal">
+                  <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" />
+                  <Label Text="{Binding Type}" />
+                  <Label Text="{Binding Name}" />
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
 
-</ScrollView>
-     <StackLayout>
-      <Button Command="{Binding New}"
-            Text="New Task" />
-   </StackLayout>
+      </ScrollView>
+      <StackLayout>
+        <Button Command="{Binding New}"
+              Text="New Task" />
+      </StackLayout>
     </StackLayout.Children>
   </StackLayout>
-  
- 
+
 </ContentPage>

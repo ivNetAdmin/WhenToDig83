@@ -29,7 +29,7 @@ namespace WhenToDig83.ViewModels
                 _selectedTask = args;
                 Name = _selectedTask.Name;
                 Date = _selectedTask.Date;
-                Type = GetType(_selectedTask.Type);
+                TypeStr = GetType(_selectedTask.TypeId);
 
                 var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
@@ -70,14 +70,14 @@ namespace WhenToDig83.ViewModels
             }
         }
         
-        private string _type;
-        public string Type
+        private string _typeStr;
+        public string TypeStr
         {
-            get { return _type; }
+            get { return _typeStr; }
             set
             {
                 //var cakes = value;
-                _type = value;
+                _typeStr = value;
                 OnPropertyChanged();
             }
         }
@@ -106,7 +106,7 @@ namespace WhenToDig83.ViewModels
             try
             {             
                 _navigation = AppHelper.CurrentPage().Navigation;
-                Type = "Cultivate";
+                TypeStr = "Cultivate";
 
             }
             catch (Exception exception)
@@ -146,7 +146,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var typeId = GetTypeId(_type);
+                    var typeId = GetTypeId(_typeStr);
                     _wtdTaskManager.AddTask(Name, Date, typeId, Notes, _selectedTask == null ? 0 : _selectedTask.ID);                   
                     MessagingCenter.Send(this, "TaskChanged");
                     await _navigation.PopModalAsync();                    

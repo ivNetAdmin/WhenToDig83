@@ -21,17 +21,18 @@ namespace WhenToDig83.Managers
 
         internal async void Add()
         {
-            //var frost = new Frost {
-            //    Year = DateTime.Now.Year,
-            //    Month = DateTime.Now.Month,
-            //    Day = DateTime.Now.Day};
-            //    await _frostRepository.Insert(frost);
 
-            Random rnd = new Random();
+            //Random rnd = new Random();
 
-            var day = rnd.Next(1, 28);
-            var month = rnd.Next(1, 12);
-            var year = rnd.Next(2010, 2016);
+            //var day = rnd.Next(1, 28);
+            //var month = rnd.Next(1, 12);
+            //var year = rnd.Next(2010, 2016);
+
+            //Random rnd = new Random();
+
+            var day = DateTime.Now.Day;
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
 
             var frost = await _frostRepository.Get(predicate: x => x.Month == month && x.Day == day);
 

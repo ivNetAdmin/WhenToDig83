@@ -16,7 +16,7 @@
 
     <custom:BindablePicker          
             ItemsSource="{Binding TaskTypes}"           
-            SelectedItem="{Binding Type}" />
+            SelectedItem="{Binding TypeStr}" />
     
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />

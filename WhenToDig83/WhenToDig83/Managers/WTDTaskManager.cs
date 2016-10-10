@@ -23,7 +23,7 @@ namespace WhenToDig83.Managers
         {
             if (taskId == 0)
             {
-                var wtdTask = new WTDTask { Name = name, Date = date, Type = type };
+                var wtdTask = new WTDTask { Name = name, Date = date, TypeId = type };
                 await _wtdTaskRepository.Insert(wtdTask);
                 if (!string.IsNullOrEmpty(notes))
                 {
@@ -41,7 +41,7 @@ namespace WhenToDig83.Managers
             {
                 var wtdTask = await _wtdTaskRepository.Get(taskId);
                 wtdTask.Name = name;
-                wtdTask.Type = type;
+                wtdTask.TypeId = type;
                 wtdTask.Date = date;                
                 await _wtdTaskRepository.Update(wtdTask);
 
