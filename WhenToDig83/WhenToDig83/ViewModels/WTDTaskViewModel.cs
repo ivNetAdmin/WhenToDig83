@@ -261,6 +261,7 @@ namespace WhenToDig83.ViewModels
                 var dateIndex = (r) * weekDays.Length + wd;
                 var dateStr = dateIndex < dates.Count ? Convert.ToString(dates[dateIndex].Day.ToString("D2")) : string.Empty;
                 var today = ((DateTime)dates[dateIndex]).ToString("ddMMyyyy") == DateTime.Now.ToString("ddMMyyyy");
+                var jobImage = GetJobImage();
 
                 lowlight = SetLowLisght(lowlight, dateStr);
 
@@ -271,7 +272,7 @@ namespace WhenToDig83.ViewModels
 
                 var backgroundImage = new Image()
                 {
-                    //  Source = jobImage,
+                    Source = jobImage,
                     IsOpaque = true,
                     Opacity = 1.0,
                 };
@@ -298,6 +299,13 @@ namespace WhenToDig83.ViewModels
 
                 grid.Children.Add(relativeLayout, wd, r);
             }
+        }
+
+        private FileImageSource GetJobImage()
+        {
+            var image = "tasktype.png";
+
+            return new FileImageSource() { File = image };
         }
 
         private bool SetLowLisght(bool lowlight, string dateStr)
