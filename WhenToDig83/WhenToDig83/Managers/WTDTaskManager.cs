@@ -21,6 +21,7 @@ namespace WhenToDig83.Managers
 
         public async void AddTask(string name, DateTime date, int type, string notes, int taskId)
         {
+            date = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
             if (taskId == 0)
             {
                 var wtdTask = new WTDTask { Name = name, Date = date, TypeId = type };
@@ -77,6 +78,11 @@ namespace WhenToDig83.Managers
             var startDate = new DateTime(year, month, 1);
             var endDate = new DateTime(year, month + 1, 1);
             return await _wtdTaskRepository.Get(predicate: x => x.Date >= startDate && x.Date < endDate, sortOrder: "asc", orderBy: x => x.Date);
+        }
+
+        public async Task<List<WTDTask>> GetTasksByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return await _wtdTaskRepository.Get(predicate: x => x.Date >= startDate && x.Date <= endDate, sortOrder: "asc", orderBy: x => x.Date);
         }
 
         public List<WTDTask> GetTasks()

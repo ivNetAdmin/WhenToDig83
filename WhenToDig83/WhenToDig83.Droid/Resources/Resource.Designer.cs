@@ -3311,11 +3311,32 @@ namespace WhenToDig83.Droid
 			// aapt resource value: 0x7f020062
 			public const int mr_ic_settings_light = 2130837602;
 			
-			// aapt resource value: 0x7f020064
-			public const int notification_template_icon_bg = 2130837604;
+			// aapt resource value: 0x7f02006b
+			public const int notification_template_icon_bg = 2130837611;
 			
 			// aapt resource value: 0x7f020063
-			public const int tasktype = 2130837603;
+			public const int tt1 = 2130837603;
+			
+			// aapt resource value: 0x7f020064
+			public const int tt12 = 2130837604;
+			
+			// aapt resource value: 0x7f020065
+			public const int tt123 = 2130837605;
+			
+			// aapt resource value: 0x7f020066
+			public const int tt13 = 2130837606;
+			
+			// aapt resource value: 0x7f020067
+			public const int tt2 = 2130837607;
+			
+			// aapt resource value: 0x7f020068
+			public const int tt23 = 2130837608;
+			
+			// aapt resource value: 0x7f020069
+			public const int tt3 = 2130837609;
+			
+			// aapt resource value: 0x7f02006a
+			public const int ttblank = 2130837610;
 			
 			static Drawable()
 			{

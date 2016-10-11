@@ -53,7 +53,7 @@
               <ViewCell>
                 <StackLayout Orientation="Horizontal">
                   <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" />
-                  <Label Text="{Binding Type}" />
+                  <Label Text="{Binding TypeId}" />
                   <Label Text="{Binding Name}" />
                 </StackLayout>
               </ViewCell>
