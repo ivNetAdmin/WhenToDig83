@@ -34,6 +34,9 @@
           </ListView>
         </StackLayout>
         <StackLayout Orientation="Vertical">
+          <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Date}">
+            <DatePicker.Format>ddMMMyyyy</DatePicker.Format>
+          </DatePicker>
           <Button Command="{Binding New}"
                         Text="Frost Today?" />
         </StackLayout>

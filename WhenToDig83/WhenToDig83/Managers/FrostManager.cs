@@ -16,10 +16,10 @@ namespace WhenToDig83.Managers
         public FrostManager()
         {
             _frostRepository = new RepositoryAsync<Frost>();
-            _frostDateRepository = new RepositoryAsync<FrostDate>();
+            _frostDateRepository = new RepositoryAsync<FrostDate>();           
         }
 
-        internal async void Add()
+        internal async void Add(DateTime date)
         {
 
             //Random rnd = new Random();
@@ -30,9 +30,9 @@ namespace WhenToDig83.Managers
 
             //Random rnd = new Random();
 
-            var day = DateTime.Now.Day;
-            var month = DateTime.Now.Month;
-            var year = DateTime.Now.Year;
+            var day = date.Day;
+            var month = date.Month;
+            var year = date.Year;
 
             var frost = await _frostRepository.Get(predicate: x => x.Month == month && x.Day == day);
 

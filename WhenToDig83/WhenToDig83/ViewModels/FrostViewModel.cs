@@ -17,6 +17,7 @@ namespace WhenToDig83.ViewModels
         public FrostViewModel()
         {
             _frostManager = new FrostManager();
+            Date = DateTime.Now;
         }
         
         #region Properties
@@ -31,6 +32,17 @@ namespace WhenToDig83.ViewModels
                     _responseText = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +69,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(() =>
                 {
-                    _frostManager.Add();
+                    _frostManager.Add(_date);
                     GetFrostDates();
                 });
             }
