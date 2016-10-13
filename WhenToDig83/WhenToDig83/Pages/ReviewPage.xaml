@@ -7,15 +7,16 @@
   <ContentPage.BindingContext>
     <models:ReviewViewModel />
   </ContentPage.BindingContext>
-  
+
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
-    <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
-    <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
-    <ToolbarItem Name="Review"/>
-    <ToolbarItem Name="Frost" Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
+    <ToolbarItem Icon="{Binding TaskIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
+    <ToolbarItem Icon="{Binding PlantIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
+    <ToolbarItem Icon="{Binding ReviewIcon}" />
+    <ToolbarItem Icon="{Binding FrostIcon}"  Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
   </ContentPage.ToolbarItems>
-  
-   <StackLayout>    
+
+
+  <StackLayout>    
       <Label Text="{Binding ResponseText}" />
      <Entry Placeholder="Search..." Text="{Binding SearchTerm}"/>
 

@@ -88,10 +88,16 @@ namespace WhenToDig83.ViewModels
             {
                 ResponseText = exception.ToString();
             }
-        }               
+        }
         #endregion
-        
+
         #region Navigation Events
+
+        public ImageSource TaskIcon { get { return ImageSource.FromFile("ic_task_white_48dp.png"); } }
+        public ImageSource PlantIcon { get { return ImageSource.FromFile("ic_plant_white_48dp.png"); } }
+        public ImageSource ReviewIcon { get { return ImageSource.FromFile("ic_review_white_48dp.png"); } }
+        public ImageSource FrostIcon { get { return ImageSource.FromFile("ic_frost_teal_48dp.png"); } }
+
         public ICommand ToolbarNavigationCommand
         {
             get

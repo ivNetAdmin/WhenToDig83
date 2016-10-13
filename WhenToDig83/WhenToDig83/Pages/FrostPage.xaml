@@ -9,10 +9,10 @@
   </ContentPage.BindingContext>
 
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
-    <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
-    <ToolbarItem Name="Plant" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
-    <ToolbarItem Name="Review" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
-    <ToolbarItem Name="Frost" />
+    <ToolbarItem Icon="{Binding TaskIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
+    <ToolbarItem Icon="{Binding PlantIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="plant"/>
+    <ToolbarItem Icon="{Binding ReviewIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
+    <ToolbarItem Icon="{Binding FrostIcon}" />
   </ContentPage.ToolbarItems>
 
   <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">

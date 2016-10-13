@@ -7,12 +7,12 @@
   <ContentPage.BindingContext>
     <models:PlantViewModel />
   </ContentPage.BindingContext>
-  
+
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
-    <ToolbarItem Name="Task" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
-    <ToolbarItem Name="Plant"/>
-    <ToolbarItem Name="Review" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
-    <ToolbarItem Name="Frost" Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
+    <ToolbarItem Icon="{Binding TaskIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="task"/>
+    <ToolbarItem Icon="{Binding PlantIcon}" />
+    <ToolbarItem Icon="{Binding ReviewIcon}" Command="{Binding ToolbarNavigationCommand}" CommandParameter="review"/>
+    <ToolbarItem Icon="{Binding FrostIcon}"  Command="{Binding ToolbarNavigationCommand}" CommandParameter="frost"/>
   </ContentPage.ToolbarItems>
   
   <StackLayout>
