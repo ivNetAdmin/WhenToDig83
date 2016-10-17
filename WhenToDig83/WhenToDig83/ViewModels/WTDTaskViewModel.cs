@@ -230,9 +230,6 @@ namespace WhenToDig83.ViewModels
         private async void GetTasks()
         {
             GetDates();
-            // _wtdTaskManager.AddTask("zozo", DateTime.Now, "");
-
-            //var tasks = await _wtdTaskManager.GetTasksByMonth(_currentCalendarDate.Month, _currentCalendarDate.Year);
             var tasks = await _wtdTaskManager.GetTasksByDateRange(_dates[0], _dates[_dates.Count - 1]);
 
             foreach(WTDTask task in tasks)
@@ -276,25 +273,6 @@ namespace WhenToDig83.ViewModels
             {
                 VerticalOptions = LayoutOptions.Fill
             };
-
-            //DisplayCalendarDate = _currentCalendarDate.ToString("MMM yyyy");
-
-            //var month = _currentCalendarDate.ToString("MMM yyyy");
-            //var fill = new int[] { 6, 0, 1, 2, 3, 4, 5 };
-
-            //var firstDayofMonth = new DateTime(_currentCalendarDate.Year, _currentCalendarDate.Month, 1).DayOfWeek;
-            //var calendarStartDate = new DateTime(_currentCalendarDate.Year, _currentCalendarDate.Month, 1)
-            //    .AddDays(-1 * (fill[(int)firstDayofMonth]));
-
-            //var days = DateTime.DaysInMonth(_currentCalendarDate.Year, _currentCalendarDate.Month);
-
-            //var rowCount = days + fill[(int)firstDayofMonth] > 35 ? 6 : 5;
-
-            //var dates = new List<DateTime>();
-            //for (var d = 0; d < rowCount * 7; d++)
-            //{
-            //    dates.Add(calendarStartDate.AddDays(d));
-            //}
 
             for (var r = 0; r < _rowCount; r++)
             {
@@ -352,8 +330,20 @@ namespace WhenToDig83.ViewModels
                 }),
                      Constraint.Constant(0));
 
+                label.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(() => OnLabelClicked(dates[dateIndex])),
+                });
+
+
                 grid.Children.Add(relativeLayout, wd, r);
             }
+        }
+
+        private async void OnLabelClicked(DateTime date)
+        {
+            await _navigation.PushModalAsync(new WTDTaskEditPage());
+            MessagingCenter.Send(this, "EditTask", new WTDTask { Date = date });
         }
 
         private FileImageSource GetJobImage(DateTime date)

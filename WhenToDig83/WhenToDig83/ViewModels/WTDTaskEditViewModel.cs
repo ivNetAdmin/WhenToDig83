@@ -27,12 +27,16 @@ namespace WhenToDig83.ViewModels
 
             MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
                 _selectedTask = args;
-                Name = _selectedTask.Name;
                 Date = _selectedTask.Date;
-                TypeStr = GetType(_selectedTask.TypeId);
+                if (_selectedTask.ID > 0)
+                {
+                    Name = _selectedTask.Name;
 
-                var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
-                Notes = notesResult == null ? string.Empty : notesResult.Notes;
+                    TypeStr = GetType(_selectedTask.TypeId);
+
+                    var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
+                    Notes = notesResult == null ? string.Empty : notesResult.Notes;
+                }
             });
         }
         

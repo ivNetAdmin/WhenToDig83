@@ -26,23 +26,21 @@
        <Button Text="Variety" HorizontalOptions="FillAndExpand" Command="{Binding VarietySearch}" />
        <Button Text="*" HorizontalOptions="FillAndExpand" Command="{Binding AllSearch}" />
      </StackLayout>
-
-     <ScrollView Orientation="Vertical" VerticalOptions="Start">
        <ListView x:Name="NoteListView"
-                 ItemsSource="{Binding Notes}" >
+                 ItemsSource="{Binding Notes}"
+                 VerticalOptions="Start">
          <ListView.ItemTemplate>
            <DataTemplate>
              <ViewCell>
                <StackLayout Orientation="Horizontal">
-               <Label Text="{Binding Meta}" />
-               <Label Text="{Binding Notes}" />
+                 <Image Source="{Binding Path=TypeImage}" VerticalOptions="Center"/>
+                 <Label Text="{Binding Meta}" />
+               <Label Text="{Binding Notes}" VerticalOptions="CenterAndExpand"/>
                  </StackLayout>
              </ViewCell>
            </DataTemplate>
          </ListView.ItemTemplate>
        </ListView>
-
-     </ScrollView>
    </StackLayout>
   
 </ContentPage>

@@ -43,25 +43,23 @@
         <Label Text="Sa" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" TextColor="Aqua"/>
         <Label Text="Su" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center"/>
       </Grid>
-      <StackLayout x:Name="CalendarGridHolder" />
-      <ScrollView Orientation="Vertical" VerticalOptions="Start">
+      <StackLayout x:Name="CalendarGridHolder" />     
         <ListView x:Name="TaskListView"
                   ItemsSource="{Binding WTDTasks}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                  VerticalOptions="Start">
           <ListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
                 <StackLayout Orientation="Horizontal">
-                  <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" />
-                  <Label Text="{Binding TypeId}" />
-                  <Label Text="{Binding Name}" />
+                  <Image Source="{Binding Path=TypeImage}" VerticalOptions="Center"/>      
+                  <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" VerticalOptions="CenterAndExpand"/>                            
+                  <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
               </ViewCell>
             </DataTemplate>
           </ListView.ItemTemplate>
         </ListView>
-
-      </ScrollView>
       <StackLayout>
         <Button Command="{Binding New}"
               Text="New Task" />
