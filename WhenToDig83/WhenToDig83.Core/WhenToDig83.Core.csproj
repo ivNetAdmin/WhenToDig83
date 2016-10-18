@@ -46,6 +46,7 @@
     <Compile Include="Enums\NoteType.cs" />
     <Compile Include="Enums\WTDTaskType.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

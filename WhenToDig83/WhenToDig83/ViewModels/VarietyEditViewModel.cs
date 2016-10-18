@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using WhenToDig83.Core.Entities;
 using WhenToDig83.Core.Enums;
+using WhenToDig83.Core.Helpers;
 using WhenToDig83.Helpers;
 using WhenToDig83.Managers;
 using Xamarin.Forms;
@@ -83,6 +84,9 @@ namespace WhenToDig83.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public string VarietyImage { get { return ImageHelper.Variety(); } }
+
         #endregion
 
         #region Page Events

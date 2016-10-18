@@ -100,7 +100,7 @@ namespace WhenToDig83.ViewModels
         {
             get { return _varieties; }
             set { _varieties = value; OnPropertyChanged(); }
-        }
+        }        
         #endregion
 
         #region Page Events

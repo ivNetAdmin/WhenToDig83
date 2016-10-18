@@ -10,7 +10,11 @@
 
  <StackLayout>
    <Label Text="{Binding PlantName}" />
-    <Entry Placeholder="Variety Name" Text="{Binding Name}"/>   
+   <StackLayout Orientation="Horizontal">
+     <Image Source="{Binding Path=VarietyImage}" VerticalOptions="Center" />
+     <Entry Placeholder="Variety Name" Text="{Binding Name}" VerticalOptions="Center"/>
+   </StackLayout>
+  
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
    

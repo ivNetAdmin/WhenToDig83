@@ -140,6 +140,17 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
+
+        //public ICommand Delete
+        //{
+        //    get
+        //    {
+        //        return new Command<int>(async (int parameter) =>
+        //        {
+        //            var answer = await Page.DisplayAlert("Question?", "Are you sure you want to delete this task", "Yes", "No");
+        //        });
+        //    }
+        //}
         #endregion
 
         #region Navigation Events
@@ -153,9 +164,9 @@ namespace WhenToDig83.ViewModels
         {
             get
             {
-                return new Command<string>(async (string paramter) =>
+                return new Command<string>(async (string parameter) =>
                 {
-                    switch(paramter)
+                    switch(parameter)
                     {                        
                         case "plant":
                             await _navigation.PushAsync(new PlantPage());
@@ -178,9 +189,9 @@ namespace WhenToDig83.ViewModels
         {
             get
             {
-                return new Command<string>((string paramter) =>
+                return new Command<string>((string parameter) =>
                 {
-                    switch (paramter)
+                    switch (parameter)
                     {
                         case "NextMonth":
                             _currentCalendarDate = _currentCalendarDate.AddMonths(1);

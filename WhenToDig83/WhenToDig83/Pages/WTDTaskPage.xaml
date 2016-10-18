@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:WhenToDig83.ViewModels;assembly=WhenToDig83"
-             x:Class="WhenToDig83.Pages.WTDTaskPage">
+             x:Class="WhenToDig83.Pages.WTDTaskPage"
+             x:Name="WTDTaskPage">
   <ContentPage.BindingContext>
     <models:WTDTaskViewModel />
   </ContentPage.BindingContext>
@@ -52,9 +53,10 @@
             <DataTemplate>
               <ViewCell>
                 <StackLayout Orientation="Horizontal">
-                  <Image Source="{Binding Path=TypeImage}" VerticalOptions="Center"/>      
-                  <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" VerticalOptions="CenterAndExpand"/>                            
-                  <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand"/>
+                  <Image Source="{Binding Path=TypeImage}" VerticalOptions="Center" HorizontalOptions="Start"/>      
+                  <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" VerticalOptions="Center" HorizontalOptions="End"/>                            
+                  <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                  <Button Text="X" TextColor="Red" VerticalOptions="Center" HorizontalOptions="End" Command="{Binding Path=BindingContext.Delete, Source={x:Reference Name=WTDTaskPage}}" CommandParameter="{Binding ID}"/>
                 </StackLayout>
               </ViewCell>
             </DataTemplate>

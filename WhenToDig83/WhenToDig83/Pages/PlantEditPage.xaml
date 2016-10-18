@@ -20,8 +20,11 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <Label Text="{Binding Name}" />
-          </ViewCell>          
+            <StackLayout Orientation="Horizontal">
+              <Image Source="{Binding Path=VarietyImage}" VerticalOptions="Center"/>
+              <Label Text="{Binding Name}" VerticalOptions="Center" />
+            </StackLayout>
+          </ViewCell>     
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>

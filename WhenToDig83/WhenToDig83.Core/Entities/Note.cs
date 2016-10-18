@@ -1,5 +1,6 @@
 ﻿
 using SQLite.Net.Attributes;
+using WhenToDig83.Core.Helpers;
 
 namespace WhenToDig83.Core.Entities
 {
@@ -21,7 +22,7 @@ namespace WhenToDig83.Core.Entities
                     case 2:
                         return "ic_plant_white_48dp.png";
                     default:
-                        return "ic_plant_yellow_48dp.png";
+                        return ImageHelper.Variety();
                 }
             }
         }
