@@ -169,6 +169,8 @@ namespace WhenToDig83.ViewModels
         }
         #endregion
 
+        public ImageSource DeleteIcon { get { return ImageSource.FromFile("delete.png"); } }
+
         #region Private
         private async void GetVarieties()
         {
