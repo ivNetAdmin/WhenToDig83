@@ -27,9 +27,12 @@ namespace WhenToDig83.Data
             throw new NotImplementedException();
         }
 
-        public Task<int> Delete(T entity)
+        public async Task<int> Delete(T entity)
         {
-            throw new NotImplementedException();
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                return await _connection.DeleteAsync(entity);
+            }
         }
 
        public async Task<List<T>> Get()

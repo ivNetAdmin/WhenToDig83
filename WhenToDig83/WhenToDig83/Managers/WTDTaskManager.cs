@@ -73,6 +73,17 @@ namespace WhenToDig83.Managers
             }
         }
 
+        public async void DeleteTask(int taskId)
+        {
+            var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Task && x.TypeId == taskId);
+            if (note != null)
+            {
+                await _noteRepository.Delete(note);
+            }
+            var task = await _wtdTaskRepository.Get(taskId);
+            await _wtdTaskRepository.Delete(task);
+        }
+
         public async Task<List<WTDTask>> GetTasksByMonth(int month, int year)
         {
             var startDate = new DateTime(year, month, 1);

@@ -9,6 +9,7 @@
   </ContentPage.BindingContext>
 
  <StackLayout>
+   <Button Text="Delete" HorizontalOptions="End" Command="{Binding Delete}"/>
    <Label Text="{Binding PlantName}" />
    <StackLayout Orientation="Horizontal">
      <Image Source="{Binding Path=VarietyImage}" VerticalOptions="Center" />

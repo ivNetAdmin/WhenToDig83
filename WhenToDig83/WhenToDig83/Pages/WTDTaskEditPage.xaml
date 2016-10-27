@@ -9,6 +9,7 @@
     <models:WTDTaskEditViewModel />
   </ContentPage.BindingContext>
   <StackLayout>
+    <Button Image="{Binding DeleteIcon}" HorizontalOptions="End" Command="{Binding Delete}" WidthRequest = "48"/>
     <Entry Placeholder="Task Name" Text="{Binding Name}"/>
     <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding Date}">
          <DatePicker.Format>ddMMMyyyy</DatePicker.Format>

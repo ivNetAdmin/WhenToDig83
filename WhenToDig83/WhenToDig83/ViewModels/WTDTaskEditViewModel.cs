@@ -25,7 +25,8 @@ namespace WhenToDig83.ViewModels
             _noteManager = new NoteManager();
             TaskTypes = GetTaskTypes();           
 
-            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", (message, args) => {
+            MessagingCenter.Subscribe<WTDTaskViewModel, WTDTask>(this, "EditTask", async (message, args) =>
+            {
                 _selectedTask = args;
                 Date = _selectedTask.Date;
                 if (_selectedTask.ID > 0)
@@ -34,7 +35,7 @@ namespace WhenToDig83.ViewModels
 
                     TypeStr = GetType(_selectedTask.TypeId);
 
-                    var notesResult = _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID).Result;
+                    var notesResult = await _noteManager.GetNote((int)NoteType.Task, _selectedTask.ID);
                     Notes = notesResult == null ? string.Empty : notesResult.Notes;
                 }
             });
@@ -157,7 +158,20 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
-        
+
+        public ICommand Delete
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    _wtdTaskManager.DeleteTask(_selectedTask.ID);
+                    MessagingCenter.Send(this, "TaskChanged");
+                    await _navigation.PopModalAsync();
+                });
+            }
+        }
+
         #endregion
 
         #region Private
@@ -195,5 +209,8 @@ namespace WhenToDig83.ViewModels
 
         }
         #endregion
+
+        public ImageSource DeleteIcon { get { return ImageSource.FromFile("delete.png"); } }
+
     }
 }

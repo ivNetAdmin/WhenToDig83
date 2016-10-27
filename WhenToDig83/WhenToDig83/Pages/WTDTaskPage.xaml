@@ -55,8 +55,7 @@
                 <StackLayout Orientation="Horizontal">
                   <Image Source="{Binding Path=TypeImage}" VerticalOptions="Center" HorizontalOptions="Start"/>      
                   <Label Text="{Binding Date,StringFormat='{0:ddMMM}'}" VerticalOptions="Center" HorizontalOptions="End"/>                            
-                  <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                  <Button Text="X" TextColor="Red" VerticalOptions="Center" HorizontalOptions="End" Command="{Binding Path=BindingContext.Delete, Source={x:Reference Name=WTDTaskPage}}" CommandParameter="{Binding ID}"/>
+                  <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>                
                 </StackLayout>
               </ViewCell>
             </DataTemplate>

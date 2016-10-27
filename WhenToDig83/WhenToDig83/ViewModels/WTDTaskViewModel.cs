@@ -140,17 +140,6 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
-
-        //public ICommand Delete
-        //{
-        //    get
-        //    {
-        //        return new Command<int>(async (int parameter) =>
-        //        {
-        //            var answer = await Page.DisplayAlert("Question?", "Are you sure you want to delete this task", "Yes", "No");
-        //        });
-        //    }
-        //}
         #endregion
 
         #region Navigation Events
