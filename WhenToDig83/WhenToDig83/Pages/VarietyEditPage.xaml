@@ -9,7 +9,7 @@
   </ContentPage.BindingContext>
 
  <StackLayout>
-   <Button Text="Delete" HorizontalOptions="End" Command="{Binding Delete}"/>
+   <Button Image="{Binding DeleteIcon}" HorizontalOptions="End" Command="{Binding Delete}" WidthRequest = "48"/>
    <Label Text="{Binding PlantName}" />
    <StackLayout Orientation="Horizontal">
      <Image Source="{Binding Path=VarietyImage}" VerticalOptions="Center" />
