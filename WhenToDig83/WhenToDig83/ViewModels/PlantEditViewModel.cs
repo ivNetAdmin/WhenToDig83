@@ -167,6 +167,20 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
+        
+        public ICommand Delete
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    _wtdTaskManager.DeleteTask(_selectedTask.ID);
+                    MessagingCenter.Send(this, "TaskChanged");
+                    await _navigation.PopModalAsync();
+                });
+            }
+        }
+        
         #endregion
 
         public ImageSource DeleteIcon { get { return ImageSource.FromFile("delete.png"); } }
