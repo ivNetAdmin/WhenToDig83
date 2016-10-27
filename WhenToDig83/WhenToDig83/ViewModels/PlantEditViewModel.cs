@@ -174,7 +174,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _plantManager.DeletePlant(_selectedTask.ID);
+                    _plantManager.DeletePlant(_selectedPlant.ID);
                     MessagingCenter.Send(this, "PlantChanged");
                     await _navigation.PopModalAsync();
                 });
