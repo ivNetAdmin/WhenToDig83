@@ -8,7 +8,7 @@
     <models:PlantEditViewModel />
   </ContentPage.BindingContext>
   <StackLayout>
-    <Button Text="Delete" HorizontalOptions="End" Command="{Binding Delete}"/>
+    <Button Image="{Binding DeleteIcon}" HorizontalOptions="End" Command="{Binding Delete}" WidthRequest = "48"/>
     <Entry Placeholder="Plant Name" Text="{Binding Name}"/>
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
