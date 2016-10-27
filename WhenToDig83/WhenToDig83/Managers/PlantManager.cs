@@ -82,6 +82,36 @@ namespace WhenToDig83.Managers
             }
         }
 
+         public async void DeleteVariety(int varietyId)
+        {
+            var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Variety && x.TypeId == varietyId);
+            if (note != null)
+            {
+                await _noteRepository.Delete(note);
+            }
+            var variety = await _varietyRepository.Get(varietyId);
+            await _varietyRepository.Delete(variety);
+        }
+        
+        public async void DeletePlant(int plantId)
+        {
+            var note = await _noteRepository.Get(predicate: x => x.Type == (int)NoteType.Plant && x.TypeId == plantId);
+            if (note != null)
+            {
+                await _noteRepository.Delete(note);
+            }
+            
+            var varieties = await _varietyRepository.Get(predicate: x.PlantId == plantId);
+            
+            foreach(variety in varieties)
+            {
+                DeleteVariety(variety.ID);
+            }
+            
+            var task = await _plantRepository.Get(plantId);
+            await _plantRepository.Delete(task);
+        }
+        
         public async Task<Plant> GetPlant(int plantId)
         {
             return await _plantRepository.Get(plantId);
