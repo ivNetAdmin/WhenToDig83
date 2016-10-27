@@ -149,8 +149,8 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command(async () =>
                 {
-                    _wtdTaskManager.DeleteTask(_selectedTask.ID);
-                    MessagingCenter.Send(this, "TaskChanged");
+                    _plantManager.DeleteVariety(_selectedVariety.ID);
+                    MessagingCenter.Send(this, "VarietyChanged");
                     await _navigation.PopModalAsync();
                 });
             }
