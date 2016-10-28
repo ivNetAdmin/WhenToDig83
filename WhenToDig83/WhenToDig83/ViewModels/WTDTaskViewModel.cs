@@ -158,6 +158,26 @@ namespace WhenToDig83.ViewModels
                 });
             }
         }
+
+        public ICommand AddMonthTasks
+        {
+            get
+            {
+                return new Command(async () =>
+                {                
+                    GetDates();
+                    var tasks = await _wtdTaskManager.GetTasksByDateRange(_dates[0], _dates[_dates.Count - 1]);
+                    foreach(var task in tasks)
+                    {
+                        _wtdTaskManager.AddTask(task.Name, GetNewDate(task.Date), task.TypeId, string.Empty, 0);
+                    }
+
+                    _currentCalendarDate = _currentCalendarDate.AddYears(1);
+                    GetTasks();
+                });
+            }
+        }
+      
         #endregion
 
         #region Navigation Events
@@ -408,6 +428,44 @@ namespace WhenToDig83.ViewModels
 
             return lowlight;
         }
+
+        private DateTime GetNewDate(DateTime date)
+        {
+            var dow = date.DayOfWeek;
+            var newDate = new DateTime(DateTime.Now.Year, date.Month, date.Day);
+            return AdjustDate(newDate, dow);
+        }
+
+        private DateTime AdjustDate(DateTime newDate, DayOfWeek dow)
+        {
+            // find closest date to day of week
+            var countForward = 0;
+            var countBackward = 0;
+            var adjustDate = newDate;
+
+            for(countForward = 0; countForward<8; countForward++)
+            {
+                if (newDate.DayOfWeek == dow) break;
+                newDate = newDate.AddDays(1);
+            }
+
+            newDate = adjustDate;
+
+            for (countBackward = 0; countBackward < 8; countBackward++)
+            {
+                if (newDate.DayOfWeek == dow) break;
+                newDate = newDate.AddDays(-1);
+            }
+
+            if(countForward<= countBackward)
+            {
+                return adjustDate.AddDays(countForward);
+            }else
+            {
+                return adjustDate.AddDays(countBackward * -1);
+            }            
+        }
+
         #endregion
     }
 }
