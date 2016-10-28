@@ -23,14 +23,17 @@ namespace WhenToDig83.ViewModels
             _plantManager = new PlantManager();
             _noteManager = new NoteManager();           
 
-            MessagingCenter.Subscribe<PlantViewModel, Plant>(this, "EditPlant", (message, args) => {
+            MessagingCenter.Subscribe<PlantViewModel, Plant>(this, "EditPlant", async (message, args) =>
+            {
                 _selectedPlant = args;
                 Name = _selectedPlant.Name;
-              
-                var notesResult = _noteManager.GetNote((int)NoteType.Plant, _selectedPlant.ID).Result;
+
+                var notesResult = await _noteManager.GetNote((int)NoteType.Plant, _selectedPlant.ID);
                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
 
                 GetVarieties();
+
+                IsNewVarietyButtonVisible = true;
             });
             
             MessagingCenter.Subscribe<VarietyEditViewModel>(this, "VarietyChanged", (message) => {
@@ -99,8 +102,23 @@ namespace WhenToDig83.ViewModels
         public ObservableCollection<Variety> Varieties
         {
             get { return _varieties; }
-            set { _varieties = value; OnPropertyChanged(); }
-        }        
+            set {
+                _varieties = value;               
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isNewVarietyButtonVisible;
+        public bool IsNewVarietyButtonVisible
+        {
+            get { return _isNewVarietyButtonVisible; }
+            set
+            {                
+                _isNewVarietyButtonVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        
         #endregion
 
         #region Page Events
@@ -109,6 +127,7 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
+                IsNewVarietyButtonVisible = false;
             }
             catch (Exception exception)
             {
@@ -188,6 +207,7 @@ namespace WhenToDig83.ViewModels
         #region Private
         private async void GetVarieties()
         {
+            if (Varieties != null) Varieties.Clear();
             var varieties = await _plantManager.GetVarieties(_selectedPlant.ID);
             Varieties = new ObservableCollection<Variety>(varieties);
         }

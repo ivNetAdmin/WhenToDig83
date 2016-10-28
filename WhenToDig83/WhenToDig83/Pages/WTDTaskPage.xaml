@@ -62,8 +62,12 @@
           </ListView.ItemTemplate>
         </ListView>
       <StackLayout>
-        <Button Command="{Binding New}"
-              Text="New Task" />
+        <StackLayout Orientation="Horizontal">
+          <Button Command="{Binding New}"
+              Text="New Task" HorizontalOptions="StartAndExpand" />
+          <Button Command="{Binding AddMonthTasks}"
+              Text="{Binding AddMonthTaskText}" IsVisible="{Binding IsAddMonthTasksButtonVisible}" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
       </StackLayout>
     </StackLayout.Children>
   </StackLayout>

@@ -13,7 +13,7 @@
     <Label Text="Notes:" />
     <Editor Text="{Binding Notes}" />
     <StackLayout Orientation="Horizontal">
-      <Button Text="New Variety" HorizontalOptions="FillAndExpand" Command="{Binding NewVariety}"/>
+      <Button Text="New Variety" HorizontalOptions="FillAndExpand" Command="{Binding NewVariety}" IsVisible="{Binding IsNewVarietyButtonVisible}"/>
     </StackLayout>
        <ListView x:Name="VarietyListView"
               ItemsSource="{Binding Varieties}"

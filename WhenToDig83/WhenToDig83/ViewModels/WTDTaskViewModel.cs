@@ -99,6 +99,23 @@ namespace WhenToDig83.ViewModels
             get { return _calendarGridChildren; }
             set { _calendarGridChildren = value; OnPropertyChanged(); }
         }
+
+        private bool _isAddMonthTasksButtonVisible;
+        public bool IsAddMonthTasksButtonVisible
+        {
+            get { return _isAddMonthTasksButtonVisible; }
+            set
+            {
+                _isAddMonthTasksButtonVisible = value;
+                OnPropertyChanged();
+            }
+        }
+       
+        public string AddMonthTaskText
+        {
+            get { return string.Format("Add to {0}", DateTime.Now.Year); }            
+        }
+        
         #endregion
 
         #region Page Events
@@ -107,6 +124,7 @@ namespace WhenToDig83.ViewModels
             try
             {
                 _navigation = AppHelper.CurrentPage().Navigation;
+                IsAddMonthTasksButtonVisible = false;
                 GetTasks();
                 
             }
@@ -196,6 +214,11 @@ namespace WhenToDig83.ViewModels
                             break;
                     }
 
+                    if (_currentCalendarDate.Year < DateTime.Now.Year)
+                    {
+                        IsAddMonthTasksButtonVisible = true;
+                    }
+
                     GetTasks();
                     
                 });              
@@ -229,6 +252,8 @@ namespace WhenToDig83.ViewModels
 
         private async void GetTasks()
         {
+            if (WTDTasks != null) WTDTasks.Clear();
+
             GetDates();
             var tasks = await _wtdTaskManager.GetTasksByDateRange(_dates[0], _dates[_dates.Count - 1]);
 

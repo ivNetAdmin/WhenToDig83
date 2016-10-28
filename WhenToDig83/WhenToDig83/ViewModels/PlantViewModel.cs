@@ -148,6 +148,8 @@ namespace WhenToDig83.ViewModels
         #region Private
         private async void GetPlants()
         {
+            if (Plants != null) Plants.Clear();
+
             var plants = await _plantManager.GetPlants();
             Plants = new ObservableCollection<Plant>(plants);
         }

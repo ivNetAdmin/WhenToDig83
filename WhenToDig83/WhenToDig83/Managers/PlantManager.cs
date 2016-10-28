@@ -100,10 +100,10 @@ namespace WhenToDig83.Managers
             {
                 await _noteRepository.Delete(note);
             }
+
+            var varieties = await _varietyRepository.Get(predicate: x => x.PlantId == plantId, sortOrder: "asc", orderBy: x => x.ID);
             
-            var varieties = await _varietyRepository.Get(predicate: x.PlantId == plantId);
-            
-            foreach(variety in varieties)
+            foreach(var variety in varieties)
             {
                 DeleteVariety(variety.ID);
             }

@@ -28,16 +28,17 @@ namespace WhenToDig83.ViewModels
                 PlantName = _selectedPlant.Name;          
             });
             
-             MessagingCenter.Subscribe<PlantEditViewModel, Variety>(this, "EditVariety", (message, args) => {
-                _selectedVariety = args;
-                Name = _selectedVariety.Name;
-              
-               _selectedPlant=_plantManager.GetPlant(_selectedVariety.PlantId).Result;
+             MessagingCenter.Subscribe<PlantEditViewModel, Variety>(this, "EditVariety", async (message, args) =>
+             {
+                 _selectedVariety = args;
+                 Name = _selectedVariety.Name;
+
+                 _selectedPlant = await _plantManager.GetPlant(_selectedVariety.PlantId);
                  PlantName = _selectedPlant.Name;
 
-                 var notesResult = _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID).Result;
-                Notes = notesResult == null ? string.Empty : notesResult.Notes;
-            });
+                 var notesResult = await _noteManager.GetNote((int)NoteType.Variety, _selectedVariety.ID);
+                 Notes = notesResult == null ? string.Empty : notesResult.Notes;
+             });
         }
 
         #region Properties
