@@ -64,9 +64,9 @@
       <StackLayout>
         <StackLayout Orientation="Horizontal">
           <Button Command="{Binding New}"
-              Text="New Task" HorizontalOptions="StartAndExpand" />
+              Text="New Task" HorizontalOptions="FillAndExpand" />
           <Button Command="{Binding AddMonthTasks}"
-              Text="{Binding AddMonthTaskText}" IsVisible="{Binding IsAddMonthTasksButtonVisible}" HorizontalOptions="EndAndExpand"/>
+              Text="{Binding AddMonthTaskText}" IsVisible="{Binding IsAddMonthTasksButtonVisible}" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
       </StackLayout>
     </StackLayout.Children>

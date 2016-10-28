@@ -198,6 +198,7 @@ namespace WhenToDig83.ViewModels
             {
                 return new Command<string>((string parameter) =>
                 {
+                    IsAddMonthTasksButtonVisible = false;
                     switch (parameter)
                     {
                         case "NextMonth":
